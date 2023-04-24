@@ -16,7 +16,9 @@ import HelloWorld from './components/HelloWorld.vue'
     <RouterView />
   </main>
   <footer class="footer">
-      footer
+      <div class="wrapper">
+         footer
+      </div>
   </footer>
 </template>
 
@@ -30,15 +32,29 @@ import HelloWorld from './components/HelloWorld.vue'
       right: 0;
       z-index: 10;
       height:5rem;
+      &>.wrapper {
+        margin: 0 auto;
+        max-width: 75rem;
+      }
   }
 
   .main {
       grid-area: main;
-      background-color: green;
+      height: 100vh;
+      width: 75rem;
   }
 
   .footer{
       grid-area: footer;
       background-color: red;
+      position: absolute;
+      margin-left:-35rem;
+      margin-right:-35rem;
+      padding-left:35rem;
+      padding-right:35rem;
+      &>.wrapper {
+        margin: 0 auto;
+        max-width: 75rem;
+      }
   }
 </style>
