@@ -13,7 +13,12 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
   <main class="main">
-    <RouterView />
+      <Suspense>
+          <RouterView />
+          <template #fallback>
+              Loading...
+          </template>
+      </Suspense>
   </main>
   <footer class="footer">
       <div class="wrapper">
