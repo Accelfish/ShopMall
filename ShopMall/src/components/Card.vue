@@ -88,7 +88,9 @@ const handleReplaceLazyLoadingImage = function(event: { target: { src: string; o
 <style scoped lang="scss">
 .card {}
 .card__head {}
-.card__img {}
+.card__img img {
+  width:100%;
+}
 .card__body {}
 .card__title {}
 .card__price {}

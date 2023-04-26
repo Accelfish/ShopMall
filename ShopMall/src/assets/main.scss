@@ -2,15 +2,15 @@
 
 #app {
   //margin: 0 auto;
+  width:100%;
   font-weight: normal;
   display:grid;
   grid-template-columns: repeat(12, 1fr) ;
-  grid-template-rows: 5rem 1fr auto;
+  grid-template-rows: 5rem 1fr 3rem;
   grid-template-areas:
           'header header header header header header header header header header header header'
-          'main main main main main main main main main main main main'
+          'left left main main main main main main main main right right'
           'footer footer footer footer footer footer footer footer footer footer footer footer';
-  height:100%;
 }
 
 a,
@@ -23,6 +23,7 @@ a,
 body {
   display: flex;
   place-items: center;
+  justify-content: center;
 }
 
 @media (hover: hover) {
