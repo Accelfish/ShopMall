@@ -4,12 +4,17 @@ import Product from "@/entities/product";
 import Card from '@/components/Card.vue';
 import Pagination from '@/components/Pagination.vue';
 
+interface IPagination {
+    totalPage: number,
+    currentPage: number,
+}
+
 const isLoading = ref(true);
 const perPage = ref(16);
 
 let pageData: IPagination = reactive({
-  totalPage: 0,
-  currentPage: 0
+  totalPage: 1,
+  currentPage: 1
 });
 
 let products: Product[] = reactive([]);
@@ -24,9 +29,11 @@ try {
     isLoading.value = false;
 }
 
-const updateCurrentPage = function (event) {
-  console.log(event);
+const updateCurrentPage = (toPage: number) => {
+  pageData.currentPage = toPage;
+  console.log(pageData.currentPage);
 }
+
 </script>
 <template>
     <div class="product__container" v-if="!isLoading">
@@ -40,9 +47,11 @@ const updateCurrentPage = function (event) {
         </div>
     </div>
     <div class="pagination__container">
+        {{pageData.currentPage}}
+
       <Pagination :totalPage = "pageData.totalPage"
                   :currentPage = "pageData.currentPage"
-                  @updateCurrentPage = "updateCurrentPage"
+                  @update-current-page = "updateCurrentPage"
       />
     </div>
 </template>

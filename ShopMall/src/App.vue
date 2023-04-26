@@ -20,11 +20,11 @@ import HelloWorld from './components/HelloWorld.vue'
           </template>
       </Suspense>
   </main>
-  <footer class="footer-wrapper">
-      <div class="footer">
-         footer
-      </div>
-  </footer>
+<!--  <footer class="footer-wrapper">-->
+<!--      <div class="footer">-->
+<!--         footer-->
+<!--      </div>-->
+<!--  </footer>-->
 </template>
 
 <style scoped lang="scss">

@@ -1,4 +1,6 @@
 <script setup lang="ts" >
+import {watch, watchEffect, toRefs, reactive, ref, toRef} from "vue";
+
 interface IPagination {
   totalPage: number,
   currentPage: number,
@@ -8,21 +10,33 @@ const emit = defineEmits<{
   (e: 'updateCurrentPage', page: number): void
 }>()
 
-const props = withDefaults(defineProps<IPagination>(), {
+let props = withDefaults(defineProps<IPagination>(), {
   totalPage: 0,
   currentPage: 0,
 });
 
-const updateCurrentPage:void = (page) => emit('updateCurrentPage', page);
+let propsData = toRefs(props);
+let data = reactive({
+    totalPage: 0,
+    currentPage: 0,
+});
 
+function updateCurrentPage (page: number) {emit('updateCurrentPage', page)};
+watchEffect(()=>{
+    data.currentPage = props.currentPage;
+})
 
 </script>
 <template>
   <ol class="pagination">
-    <li class="pagination__item" v-for="(item, index) in totalPage" :key="index" @click="updateCurrentPage(item)">
-      {{ item }}
+    <li class="pagination__item"
+        :class="{'pagination__item-active': data.currentPage == item}"
+        v-for="(item, index) in props.totalPage" :key="index"
+        @click="updateCurrentPage(item)">
+      {{ item }}-{{data.currentPage}}
     </li>
   </ol>
+
 </template>
 
 <style scoped>
@@ -43,5 +57,8 @@ const updateCurrentPage:void = (page) => emit('updateCurrentPage', page);
   margin-right: 0.9375rem;
   font-size: 1.25rem;
   height: 1.875rem;
+}
+.pagination__item-active{
+    background-color: #EE4D2DFF;
 }
 </style>

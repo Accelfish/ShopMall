@@ -9,7 +9,16 @@ interface ICard {
     isLazyLoading: boolean,
 }
 
-const props = withDefaults(defineProps<ICard>(), {});
+const props = withDefaults(defineProps<ICard>(), {
+    title: '',
+    img: undefined,
+    url: '',
+    price: 0,
+    rating: undefined,
+    isLazyLoading: true,
+
+
+});
 
 const handleReplaceLazyLoadingImage = function(event: { target: { src: string; onerror: null; }; }) {
     event.target.src = placeholderImage;
