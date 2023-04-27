@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {reactive, ref} from "vue";
+import {reactive, ref, computed} from "vue";
 import Product from "@/entities/product";
 import Card from '@/components/Card.vue';
 import Pagination from '@/components/Pagination.vue';
@@ -12,22 +12,32 @@ interface IPagination {
 const isLoading = ref(true);
 const perPage = ref(16);
 
-let pageData: IPagination = reactive({
+const pageData: IPagination = reactive({
   totalPage: 1,
   currentPage: 1
 });
 
-let products: Product[] = reactive([]);
+const products: Product[] = reactive({data:[]});
+
 try {
-    products = await fetch('/data.json').then((res) => res.json());
-    pageData = {
-      totalPage: Math.ceil(products.length/perPage.value),
-      currentPage: 1,
-    }
+    products.data = await fetch('/data.json').then((res) => res.json())
+    pageData.totalPage = Math.ceil(products.data.length/perPage.value);
+    pageData.currentPage = 1;
 } catch (e) {
 } finally {
     isLoading.value = false;
 }
+
+const getProductList: Product[] = computed({
+  get: () => {
+    const begin: number = pageData.currentPage === 1 ? 0 : (pageData.currentPage - 1) * perPage.value;
+    const end: number = pageData.currentPage * perPage.value > products.data.length ?
+                          products.data.length - 1 :
+                          pageData.currentPage * perPage.value;
+
+    return products.data.slice(begin, end);
+  },
+})
 
 const updateCurrentPage = (toPage: number) => {
   pageData.currentPage = toPage;
@@ -37,7 +47,7 @@ const updateCurrentPage = (toPage: number) => {
 </script>
 <template>
     <div class="product__container" v-if="!isLoading">
-        <div class="product__item" v-for="product in products.slice(0,16)" :key="product.id">
+        <div class="product__item" v-for="product in getProductList" :key="product.id">
             <Card :title="product.name"
                   :url="product.url ? product.url : ''"
                   :price="product.sellPrice"
@@ -47,8 +57,6 @@ const updateCurrentPage = (toPage: number) => {
         </div>
     </div>
     <div class="pagination__container">
-        {{pageData.currentPage}}
-
       <Pagination :totalPage = "pageData.totalPage"
                   :currentPage = "pageData.currentPage"
                   @update-current-page = "updateCurrentPage"
