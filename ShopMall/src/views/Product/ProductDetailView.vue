@@ -126,9 +126,6 @@ onMounted(async () => {
           </button>
         </div>
       </div>
-      <!--        {{product.additionPrice}}-->
-      <!--      {{product.store.id}}-->
-
     </div>
 
     <div class="store
@@ -166,7 +163,8 @@ onMounted(async () => {
                 p-4
                 rounded">
       <h3 class="text-2xl mb-2">商品詳情</h3>
-      <div class="product__content" v-if="product.description" v-html="product.description">
+      <div class="product__content flex justify-center p-4" v-if="product.description">
+        <div v-html="product.description"></div>
       </div>
       <div class="product__content product__content-empty flex justify-center items-center" v-else>
         <p class="text-gray-300 text-3xl">暫無詳情</p>
