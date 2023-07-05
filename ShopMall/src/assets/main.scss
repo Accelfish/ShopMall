@@ -1,10 +1,7 @@
 @import 'base.scss';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
+  //margin: 0 auto;
   font-weight: normal;
 }
 
@@ -36,6 +33,5 @@ a,
             'main main main main main main main main main main main main'
             'footer footer footer footer footer footer footer footer footer footer footer footer';
     height:100%;
-    padding: 0 2rem;
   }
 }
