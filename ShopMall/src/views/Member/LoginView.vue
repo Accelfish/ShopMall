@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import {storeToRefs} from "pinia";
   import { useUser } from "@/stores/user";
-  import router from "../router";
+  import router from "../../router";
 
   const userStore = useUser();
   const { user, isLogin } = storeToRefs(userStore);
