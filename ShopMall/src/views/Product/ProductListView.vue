@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {reactive, ref, computed, watch, onMounted} from "vue";
 import type {ComputedRef, Ref} from "vue";
-import {useRoute, useRouter} from "vue-router";
+import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 import type {LocationQueryValue} from 'vue-router';
 import Product from "@/entities/product";
 import Card from '@/components/Card.vue';
@@ -9,13 +9,6 @@ import Pagination from '@/components/Pagination.vue';
 import Rating from "@/components/Rating.vue";
 import axios from "axios";
 
-interface IFilterQuery {
-  page: number,
-  rate?: number,
-  minPrice?: number | null,
-  maxPrice?: number | null,
-  keyword?: string,
-}
 const rateRage: Array<number> = [5, 4, 3, 2, 1];
 
 const route = useRoute();
@@ -23,63 +16,58 @@ const router = useRouter();
 const queryMinPrice: LocationQueryValue | LocationQueryValue[] = route.query.minprice || route.query.minPrice;
 const queryMaxPrice: LocationQueryValue | LocationQueryValue[] = route.query.maxprice || route.query.maxPrice;
 
-const queryKeyword: string = route.query.keyword ? route.query.keyword as string : '';
 const page: number = route.query.page ? parseInt(route.query.page as string, 10) : 1;
-const filterRate: number = route.query.rate ? parseInt(route.query.rate as string, 10) : 0;
 const filterMinPrice: number | null = queryMinPrice ? parseInt(queryMinPrice.toString(), 10) : null;
 const filterMaxPrice: number | null = queryMaxPrice ? parseInt(queryMaxPrice.toString(), 10) : null;
 
-const currentPage = ref(page);
-const currentRate = ref(filterRate);
-const currentMinPrice = ref(filterMinPrice);
-const currentMaxPrice = ref(filterMaxPrice);
-const keyword = ref(queryKeyword);
+const currentPage:Ref<number> = ref(page);
+const currentRate:Ref<number> = ref(parseInt(route.query.rate as string, 10));
+const currentMinPrice:Ref<number|null> = ref(filterMinPrice);
+const currentMaxPrice:Ref<number|null> = ref(filterMaxPrice);
+const keyword:Ref<string> = ref(route.query.keyword as string);
 
-// let filter: IFilterQuery = reactive({
-//   rate: filterRate,
-//   minPrice: filterMinPrice,
-//   maxPrice: filterMaxPrice,
-//   page: page
-// })
+onBeforeRouteUpdate(async (to, from) => {
+  keyword.value = to.query.keyword ? to.query.keyword as string : '';
+  if(keyword.value){
+    if(from.query.keyword) {
+      if(keyword.value !== from.query.keyword) {
+        setCurrentPage(1);
+      }
+    }
+  }
+  const queryMinPrice: LocationQueryValue | LocationQueryValue[] = to.query.minprice || to.query.minPrice;
+  const queryMaxPrice: LocationQueryValue | LocationQueryValue[] = to.query.maxprice || to.query.maxPrice;
 
-// let filterQueryObject: IFilterQuery = reactive({
-//   rate: currentRate.value,
-//   minPrice: currentMinPrice.value,
-//   maxPrice: currentMaxPrice.value,
-//   page: currentPage.value,
-//   keyword: keyword.value,
-// });
+  currentRate.value = to.query.rate ? parseInt(to.query.rate as string, 10) : 0;
+  currentMinPrice.value = queryMinPrice ? parseInt(queryMinPrice as string, 10) : null;
+  currentMaxPrice.value = queryMaxPrice ? parseInt(queryMaxPrice as string, 10) : null;
+  const result = await getProducts();
+  products.value = result;
+})
 
+onMounted(async () => {
+  const result = await getProducts();
+  products.value = result;
+});
 
 const setRateQueryObject = (rate: number) => {
   currentRate.value = rate;
-  console.log('setRateQueryObject', rate);
+  updateCurrentPage(1)
 }
 
 const setPriceQueryObject = () => {
   if (currentMinPrice.value && currentMaxPrice.value && currentMinPrice.value > currentMaxPrice.value) {
     [currentMinPrice.value, currentMaxPrice.value] = [currentMaxPrice.value, currentMinPrice.value];
   }
-
-  // filterQueryObject.minPrice = currentMinPrice.value;
-  // filterQueryObject.maxPrice = currentMaxPrice.value;
-  // console.log('setPriceQueryObject', filterQueryObject.minPrice, filterQueryObject.maxPrice);
-
+  updateCurrentPage(1)
 }
 
 const setCurrentPage = (page: number) => {
-  // filterQueryObject.page = page;
   currentPage.value = page;
-  console.log('setCurrentPage', page);
 }
 
 const getQuery = computed(() => {
   const tmpObj = {};
-  // filterQueryObject.rate ? Object.assign(tmpObj, {rate: filterQueryObject.rate}) : '';
-  // filterQueryObject.page ? Object.assign(tmpObj, {page: filterQueryObject.page}) : '';
-  // filterQueryObject.minPrice ? Object.assign(tmpObj, {minPrice: filterQueryObject.minPrice}) : '';
-  // filterQueryObject.maxPrice ? Object.assign(tmpObj, {maxPrice: filterQueryObject.maxPrice}) : '';
-  // filterQueryObject.keyword ? Object.assign(tmpObj, {keyword: filterQueryObject.keyword}) : '';
   currentRate.value ? Object.assign(tmpObj, {rate: currentRate.value}) : '';
   currentPage.value ? Object.assign(tmpObj, {page: currentPage.value}) : '';
   currentMinPrice.value ? Object.assign(tmpObj, {minPrice: currentMinPrice.value}) : '';
@@ -89,24 +77,6 @@ const getQuery = computed(() => {
   return {value: tmpObj, queryString: qs};
 })
 
-// const getFilterPanelObject: ComputedRef<IFilterQuery> = computed(() => {
-//   const queryObj: IFilterQuery = {page: filter.page ? filter.page : 1};
-//
-//   filterQueryObject.rate ? Object.assign(queryObj, {rate: filterQueryObject.rate}) : '';
-//   filterQueryObject.page ? Object.assign(queryObj, {page: filterQueryObject.page}) : '';
-//
-//   let filterMinPrice = filterQueryObject.minPrice;
-//   let filterMaxPrice = filterQueryObject.maxPrice;
-//   if (filterMinPrice && filterMaxPrice && filterMinPrice > filterMaxPrice) {
-//     [filterMinPrice, filterMaxPrice] = [filterMaxPrice, filterMinPrice];
-//   }
-//
-//   filterMinPrice ? Object.assign(queryObj, {minPrice: filterMinPrice}) : '';
-//   filterMaxPrice ? Object.assign(queryObj, {maxPrice: filterMaxPrice}) : '';
-//
-//   return queryObj;
-// })
-
 const isLoading: Ref<boolean> = ref(true);
 const perPage: Ref<number> = ref(12);
 let products: Ref<Product[]> = ref([]);
@@ -114,6 +84,7 @@ let products: Ref<Product[]> = ref([]);
 async function getProducts(): Promise<Product[]> {
   let pd: Product[] = [];
   try {
+
     let result = await axios.get('/data.json?' + getQuery.value.queryString);
     let productList: Product[] = result.data;
     if (currentMinPrice.value) {
@@ -137,7 +108,7 @@ async function getProducts(): Promise<Product[]> {
     }
 
     pd = productList.map((item: Product) => {
-      item.onSell ? item.url = `/productDetail/${item.id}` : ''
+      item.onSell ? item.url = `/${item.id}` : ''
       return item;
     });
   } catch (e) {
@@ -160,31 +131,16 @@ const updateCurrentPage = (toPage: number) => {
   });
 }
 
-const productList: ComputedRef<Product[]> = computed(() => {
-  const pd = products.value;
+const showProductList: ComputedRef<Product[]> = computed(() => {
+  const pd = [...products.value];
   const begin: number = currentPage.value === 1 ? 0 : (currentPage.value - 1) * perPage.value;
-  const result = pd.splice(begin, perPage.value);
+  const end: number = begin + perPage.value <= pd.length ? begin + perPage.value : pd.length;
+  const result = pd.slice(begin, end);
   return result;
 })
 
-onMounted(async () => {
-  const productList = await getProducts();
-  products.value = productList;
-});
-
-watch(
-    () => route.query,
-    async (newQuery) => {
-      console.log(newQuery);
-      getProducts();
 
 
-      // if (newQuery.keyword) {
-      //   keyword.value = newQuery.keyword as string;
-      // }
-      // console.log(getQuery.value);
-    }
-)
 </script>
 <template>
   <div class="flex">
@@ -215,8 +171,7 @@ watch(
                   :class="{'bg-amber-300': rate===currentRate}"
                   v-for="rate in rateRage"
                   :key="rate"
-                  @click="setRateQueryObject(rate)"
-              >
+                  @click="setRateQueryObject(rate)">
                 <Rating :max-rate="5" :show-rate="rate"></Rating>
               </li>
             </ul>
@@ -225,14 +180,14 @@ watch(
       </div>
     </div>
     <template v-if="!isLoading">
-      <div class="list w-full" v-if="productList.length">
+      <div class="list w-full" v-if="showProductList.length">
         <div class="list__container
                     px-8
                     grid grid-cols-2 gap-3
                     md:grid-cols-4 md:gap-3
                     mb-12">
           <div class="list__item p-2"
-               v-for="product in productList"
+               v-for="product in showProductList"
                :key="product.id">
             <Card :title="product.name"
                   :img="product.image? product.image : ''"
