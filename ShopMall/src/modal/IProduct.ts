@@ -26,4 +26,5 @@ export interface IProduct {
     description?: string;
     rating: number;
     store: IStore;
+    onSell: boolean;
 }
