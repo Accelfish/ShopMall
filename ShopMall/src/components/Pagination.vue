@@ -33,7 +33,7 @@ watchEffect(()=>{
         :class="{'pagination__item-active': data.currentPage == item}"
         v-for="(item, index) in props.totalPage" :key="index"
         @click="updateCurrentPage(item)">
-      {{ item }}-{{data.currentPage}}
+      {{ item }}
     </li>
   </ol>
 
@@ -57,8 +57,12 @@ watchEffect(()=>{
   margin-right: 0.9375rem;
   font-size: 1.25rem;
   height: 1.875rem;
+  cursor: pointer;
+
 }
 .pagination__item-active{
     background-color: #EE4D2DFF;
+    color: #fff;
+    cursor: default;
 }
 </style>

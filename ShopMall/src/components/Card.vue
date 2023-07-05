@@ -16,8 +16,6 @@ const props = withDefaults(defineProps<ICard>(), {
     price: 0,
     rating: undefined,
     isLazyLoading: true,
-
-
 });
 
 const handleReplaceLazyLoadingImage = function(event: { target: { src: string; onerror: null; }; }) {
@@ -48,7 +46,7 @@ const handleReplaceLazyLoadingImage = function(event: { target: { src: string; o
                         {{props.title}}
                     </div>
                     <div class="card__price">
-                        {{ props.price }}
+                        ${{ props.price }}
                     </div>
                     <div class="card__rating" v-if="props?.rating > 0">
                         {{ props?.rating }}
