@@ -80,7 +80,7 @@ onMounted(async () => {
         />
       </div>
     </div>
-    <div class="product__info flex flex-col">
+    <div class="product__info flex flex-col" :class="{'mb-4': isMobile}">
       <div class="mb-4 info__head">
         <h2 class="product__title text-3xl mb-2">
           {{ product.name }}
