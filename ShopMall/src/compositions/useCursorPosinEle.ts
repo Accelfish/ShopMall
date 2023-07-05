@@ -7,12 +7,9 @@ export default (htmlEle:HTMLElement, event: MouseEvent) => {
         let y = 0;
         /* Get the x and y positions of the image: */
         const htmlEleBoundingClientRect = htmlEle.getBoundingClientRect();
-        /* Calculate the cursor's x and y coordinates, relative to the ele: */
-        x = event.pageX - htmlEleBoundingClientRect.left;
-        y = event.pageY - htmlEleBoundingClientRect.top;
-        /* Consider any page scrolling: */
-        x = x - window.pageXOffset;
-        y = y - window.pageYOffset;
+        /* Calculate the cursor's x and y coordinates, relative to the ele and pageOffset: */
+        x = event.pageX - htmlEleBoundingClientRect.left - window.pageXOffset;
+        y = event.pageY - htmlEleBoundingClientRect.top - window.pageYOffset;
         return {
             posX: x,
             posY: y
