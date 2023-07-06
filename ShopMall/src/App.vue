@@ -9,17 +9,21 @@ import router from "@/router";
 const route = useRoute();
 
 const routeMap = reactive({
-  'menu': [],
   'member': [
     {
-      id: 3,
+      id: 1,
+      path: '/cart',
+      text: 'Cart',
+    },
+    {
+      id: 2,
       path: '/login',
       text: 'Login',
     },
     {
-      id:4,
-      path:'/register',
-      text:'Register',
+      id: 3,
+      path: '/register',
+      text: 'Register',
     }
   ]
 })
@@ -29,7 +33,6 @@ const deviceDetector = useDeviceDetector();
 const isMobile = ref(deviceDetector.mobile);
 const userStore = useUser();
 const {user, isLogin} = storeToRefs(userStore);
-console.log('user', user.value)
 const isMobileNavOpen = ref(false);
 const keyword = ref(route.query.keyword as string);
 
@@ -77,6 +80,7 @@ watch(()=>route.path,
         </div>
         <div class="header__foot">
           <div v-if="isLogin">
+            <RouterLink class="nav__item" to="/cart">Cart</RouterLink>
             <span class="nav__item" to="/logout">{{ user.name }}</span>
             <RouterLink class="nav__item" to="/logout">Logout</RouterLink>
           </div>
@@ -113,12 +117,6 @@ watch(()=>route.path,
     </div>
     <nav class="nav nav--mobile bg-black border-0" :class="{'hidden' : !isMobileNavOpen}">
       <ul class="flex flex-col">
-        <li class="nav__item  flex justify-center ml-0"
-            v-for="item in routeMap.menu" :key="item.id">
-          <RouterLink :to="item.path">
-            {{ item.text }}
-          </RouterLink>
-        </li>
         <template v-if="isLogin">
           <li class="nav__item  flex justify-center">
               {{ user.name }}
