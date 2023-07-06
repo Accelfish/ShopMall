@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import placeholderImage from '@/assets/images/online-shopping.png';
 import {computed, reactive, watch, ref, onMounted, watchEffect, nextTick} from 'vue';
-import type { Ref } from 'vue'
+import type {Ref} from 'vue'
 import useCursorPosinEle from "@/compositions/useCursorPosinEle";
+
 interface IPreviewImg {
   isLazyLoading: boolean,
   title: string,
   img?: string,
   preview?: boolean,
-  ratio?: number,
 }
-//ratio = zoomzonesize / imgsize;
 
-const handleReplaceLazyLoadingImage = function(event: { target: { src: string; onerror: null; }; }) {
+const handleReplaceLazyLoadingImage = function (event: { target: { src: string; onerror: null; }; }) {
   event.target.src = placeholderImage;
   event.target.onerror = null;
 }
@@ -23,7 +22,6 @@ const props = withDefaults(defineProps<IPreviewImg>(), {
   title: '',
   isLazyLoading: false,
   preview: true,
-  ratio: 4,
 });
 
 const pos = reactive({
@@ -36,9 +34,11 @@ const zoomZonePos = reactive({
   left: 0,
 });
 
+const DEFAULT_ZOOM_ZONE_SIZE = 400;
+
 const zoomZoneSize = reactive({
-  width: 0,
-  height: 0,
+  width: DEFAULT_ZOOM_ZONE_SIZE,
+  height: DEFAULT_ZOOM_ZONE_SIZE,
 });
 
 const imgContainerSize = reactive({
@@ -46,31 +46,44 @@ const imgContainerSize = reactive({
   height: 0,
 });
 
+const zoomViewSize = reactive({
+  width: 300,
+  height: 300,
+});
+
 const isShowZoomContainer = ref(false);
 
-const zoomContainer:Ref<HTMLElement> = ref();
-const imgTarget:Ref<HTMLElement> = ref();
-const imgContainer:Ref<HTMLElement> = ref();
+const zoomContainer: Ref<HTMLElement> = ref();
+const imgTarget: Ref<HTMLElement> = ref();
+const imgContainer: Ref<HTMLElement> = ref();
 
+const defaultRatio: Ref<number> = ref(1);
+onMounted(() => {
+  defaultRatio.value = zoomViewSize.width / zoomZoneSize.width;
+})
 
-onMounted(()=>{})
+const ratio = computed(() => {
+  return zoomViewSize.width / zoomZoneSize.width;
+});
 
-const resizeZoomZone = ()=>{
-  if(imgTarget.value) {
-    zoomZoneSize.width = imgTarget.value ? imgTarget.value.clientWidth / props.ratio : 0;
-    zoomZoneSize.height = imgTarget.value ? imgTarget.value.clientHeight / props.ratio : 0;
+const resizeZoomZone = () => {
+  if (imgTarget.value) {
+    zoomZoneSize.width = zoomZoneSize.height = DEFAULT_ZOOM_ZONE_SIZE * defaultRatio.value;
     imgContainerSize.width = imgContainer.value.clientWidth;
     imgContainerSize.height = imgContainer.value.clientHeight;
   }
 }
 
-const UpdzoomZoneSize = () => {
-  zoomZoneSize.width = zoomZoneSize.width += event.deltaY * -0.01;
-  zoomZoneSize.height = zoomZoneSize.height += event.deltaY * -0.01;
+const UpdZoomZoneSize = () => {
+  if (zoomZoneSize.width + event.deltaY * 0.01 <= imgContainerSize.width
+    && zoomZoneSize.height + event.deltaY * 0.01 <= imgContainerSize.height) {
+      zoomZoneSize.width = zoomZoneSize.width += event.deltaY * 0.01;
+      zoomZoneSize.height = zoomZoneSize.height += event.deltaY * 0.01;
+    }
 }
 
 const moveZoomContainer = () => {
-  if(event && zoomContainer.value) {
+  if (event && zoomContainer.value) {
     const data = useCursorPosinEle(zoomContainer.value, event);
     pos.left = data.posX;
     pos.top = data.posY;
@@ -78,40 +91,45 @@ const moveZoomContainer = () => {
   }
 }
 
-const mouseLeaveZoomContainer = () => isShowZoomContainer.value = false;
+const mouseLeaveZoomContainer = () => {
+  isShowZoomContainer.value = false;
+};
 
-watch(pos, (newVal, oldVal) => {
-  if(imgTarget.value){
-    let x = pos.left - (zoomZoneSize.width/2);
-    let y = pos.top - (zoomZoneSize.height/2);
-    if(x > imgTarget.value.clientWidth - zoomZoneSize.width){
+watch([pos, zoomZoneSize], (newVal, oldVal) => {
+  if (imgTarget.value) {
+    let x = pos.left - (zoomZoneSize.width / 2);
+    let y = pos.top - (zoomZoneSize.height / 2);
+    if (x > imgTarget.value.clientWidth - zoomZoneSize.width) {
       x = imgTarget.value.clientWidth - zoomZoneSize.width;
     }
-    if (x < 0) {x = 0;}
-    if(y > imgTarget.value.clientHeight - zoomZoneSize.height){
+    if (x < 0) {
+      x = 0;
+    }
+    if (y > imgTarget.value.clientHeight - zoomZoneSize.height) {
       y = imgTarget.value.clientHeight - zoomZoneSize.height;
     }
-    if (y < 0) {y = 0;}
+    if (y < 0) {
+      y = 0;
+    }
     zoomZonePos.left = x;
     zoomZonePos.top = y;
   }
 })
-
-
 </script>
 
 <template>
   <div class="imgContainer
               max-w-full
-              border-2
               relative"
-        ref="imgContainer">
+       ref="imgContainer">
+
     <div class="imgContainer__content"
          @mousemove="moveZoomContainer"
          @mouseleave="mouseLeaveZoomContainer"
+         @wheel.prevent="UpdZoomZoneSize"
          ref="zoomContainer">
       <picture>
-        <img class="imgContainer__target block m-0"
+        <img class="imgContainer__target block m-0 "
              @error="handleReplaceLazyLoadingImage"
              @load="resizeZoomZone"
              :src="img"
@@ -122,17 +140,18 @@ watch(pos, (newVal, oldVal) => {
         <source :srcset="img">
       </picture>
       <div class="imgContainer__zoomZone"
-           @wheel.prevent="UpdzoomZoneSize"
            v-show="props.preview && isShowZoomContainer"
            :style="{ 'left': `${zoomZonePos.left}px`, 'top':`${zoomZonePos.top}px`,
                      'width': `${zoomZoneSize.width}px`, 'height': `${zoomZoneSize.height}px` }">
       </div>
     </div>
     <div class="imgContainer__zoomView"
+         ref="zoomView"
          v-show="props.preview && isShowZoomContainer"
          :style="{'background-image': `url(${props.img})`,
-         'background-size': imgTarget ? `${imgTarget.clientWidth * props.ratio}px ${imgTarget.clientHeight * props.ratio}px` : 'auto',
-         'background-position':`-${(zoomZonePos.left * props.ratio)}px -${(zoomZonePos.top * props.ratio)}px`,
+         'background-repeat': 'no-repeat',
+         'background-size': imgTarget ? `${imgContainerSize.width * ratio}px ${imgContainerSize.height * ratio}px` : 'auto',
+         'background-position':`-${(zoomZonePos.left * ratio)}px -${(zoomZonePos.top * ratio)}px`,
          'left': `${imgContainerSize.width + 10}px`}"
     >
     </div>
@@ -140,13 +159,6 @@ watch(pos, (newVal, oldVal) => {
 </template>
 
 <style scoped lang="scss">
-.imgContainer {
-}
-
-.imgContainer__target{}
-
-.imgContainer__content{}
-
 .imgContainer__zoomZone {
   width: 400px;
   height: 400px;
@@ -160,6 +172,8 @@ watch(pos, (newVal, oldVal) => {
 
 .imgContainer__zoomView {
   position: absolute;
+  background-color: #fff;
+  z-index: 1;
   top: 0;
   left: 410px;
   border: 1px solid;
