@@ -1,22 +1,15 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
+import {RouterLink, RouterView, useRoute} from 'vue-router'
 import {ref, watch, reactive} from 'vue';
 import {useUser} from "@/stores/user";
 import {useEnv} from "@/compositions/useEnv";
+import {useDeviceDetector} from "@/compositions/useDevice";
 import {storeToRefs} from "pinia";
 import router from "@/router";
+const route = useRoute();
 
 const routeMap = reactive({
-  'menu': [{
-      id: 1,
-      path: '/Product',
-      text: 'Product',
-    },
-    {
-      id: 2,
-      path: '/About',
-      text: 'About',
-    },],
+  'menu': [],
   'member': [
     {
       id: 3,
@@ -32,60 +25,76 @@ const routeMap = reactive({
 })
 
 const {VITE_APP_NAME} = useEnv();
+const deviceDetector = useDeviceDetector();
+const isMobile = ref(deviceDetector.mobile);
 const userStore = useUser();
 const {user, isLogin} = storeToRefs(userStore);
 console.log('user', user.value)
-console.log('isLogin', isLogin.value)
 const isMobileNavOpen = ref(false);
+const keyword = ref(route.query.keyword as string);
 
 const toggleMobileNav = () => {
   isMobileNavOpen.value = !isMobileNavOpen.value;
 }
 
 const closeMobileNav = () => {
-  console.log('closeMobileNav')
   isMobileNavOpen.value = false;
 }
 
-watch(router.currentRoute, () => {
-  closeMobileNav();
-  if(router.currentRoute.value.path === '/logout'
-      || router.currentRoute.value.path === '/login'
-      || router.currentRoute.value.path === '/register') return;
+const search = () => {
+  if (keyword.value.trim() === '') return;
+  router.push({name: 'product', query: {...route.query,keyword: keyword.value.trim()}});
+}
 
-  localStorage.setItem('prevPath', router.currentRoute.value.path);
+watch(()=>route.path,
+  () => {
+    closeMobileNav();
+    if (route.path === '/logout'
+        || route.path === '/login'
+        || route.path === '/register') return;
+    localStorage.setItem('prevPath', route.path);
 })
 
 </script>
 
 <template>
   <header class="header-wrapper fixed top-0 left-0 right-0 z-10 w-full bg-black">
-    <div class="header flex justify-between px-8 h-full w-auto items-center">
-      <h2 class="header__logo md:mr-20">
-        <a class="block h-full hover:bg-transparent" href="/" title="線上藝廊">線上藝廊</a>
+    <div class="header flex justify-between px-8 h-full w-full items-center">
+      <h2 class="header__logo mr-5 md:mr-20"
+          :class="{'header__logo--mobile': isMobile}">
+        <RouterLink class="block h-full hover:bg-transparent" :to="'/'" title="線上商店">線上商店</RouterLink>
       </h2>
-      <div class="hidden header__body md:flex flex-1 items-center justify-between">
-        <nav class="nav">
-          <RouterLink v-for="item in routeMap.menu" :key="item.id"
-                      class="nav__item" :to="item.path">
-            {{item.text}}
-          </RouterLink>
-        </nav>
-
+      <div class="hidden header__body md:flex flex-1 items-center justify-between h-full">
+        <div class="flex-1 flex justify-center items-center">
+          <nav class="nav w-1/2">
+            <div class="w-full flex bg-white">
+              <input class="rounded w-full h-8 px-3 py-2" type="text" placeholder="搜尋" v-model.trim="keyword">
+              <button class="w-12 bg-gray-800 text-white" @click="search">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-white"/>
+              </button>
+            </div>
+          </nav>
+        </div>
         <div class="header__foot">
           <div v-if="isLogin">
-            <RouterLink class="nav__item" to="/logout">{{ user.name }}</RouterLink>
+            <span class="nav__item" to="/logout">{{ user.name }}</span>
             <RouterLink class="nav__item" to="/logout">Logout</RouterLink>
           </div>
           <div v-else>
             <RouterLink v-for="item in routeMap.member" :key="item.id"
                         class="nav__item" :to="{path: item.path}">
-              {{item.text}}
+              {{ item.text }}
             </RouterLink>
           </div>
         </div>
       </div>
-      <div class="md:hidden">
+      <div class="md:hidden flex justify-between w-full">
+        <div class="w-4/5 flex bg-white">
+          <input class="rounded w-full h-8 px-3 py-2" type="text" placeholder="搜尋" v-model.trim="keyword">
+          <button class="w-12 bg-gray-800 text-white" @click="search">
+            <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-white"/>
+          </button>
+        </div>
         <!-- Mobile menu button -->
         <button @click="toggleMobileNav">
           <svg class="w-6 h-6 text-gray-500 hover:text-green-500 "
@@ -102,38 +111,36 @@ watch(router.currentRoute, () => {
         </button>
       </div>
     </div>
-    <div class="flex justify-center bg-black border-0" :class="{'hidden' : !isMobileNavOpen}">
-      <ul>
-        <RouterLink v-for="item in routeMap.menu" :key="item.id"
-                    class="nav__item" :to="item.path">
-          <li>
-            {{item.text}}
-          </li>
-        </RouterLink>
+    <nav class="nav nav--mobile bg-black border-0" :class="{'hidden' : !isMobileNavOpen}">
+      <ul class="flex flex-col">
+        <li class="nav__item  flex justify-center ml-0"
+            v-for="item in routeMap.menu" :key="item.id">
+          <RouterLink :to="item.path">
+            {{ item.text }}
+          </RouterLink>
+        </li>
         <template v-if="isLogin">
-          <RouterLink class="nav__item" to="/logout">
-            <li>
+          <li class="nav__item  flex justify-center">
               {{ user.name }}
-            </li>
-          </RouterLink>
-          <RouterLink class="nav__item" to="/logout">
-            <li>
-              Logout
-            </li>
-          </RouterLink>
+          </li>
+          <li class="nav__item  flex justify-center">
+            <RouterLink to="/logout">
+                Logout
+            </RouterLink>
+          </li>
         </template>
         <template v-else>
-          <RouterLink v-for="item in routeMap.member" :key="item.id"
-                      class="nav__item" :to="{path: item.path}">
-            {{item.text}}
-          </RouterLink>
+          <li  class="nav__item flex justify-center"
+               v-for="item in routeMap.member" :key="item.id">
+            <RouterLink :to="{path: item.path}">
+                {{ item.text }}
+            </RouterLink>
+          </li>
         </template>
       </ul>
-    </div>
-
-
+    </nav>
   </header>
-  <main class="main min-h-screen w-full" @click="closeMobileNav">
+  <main class="main min-h-screen w-full pt-2" @click="closeMobileNav">
     <Suspense>
       <RouterView/>
       <template #fallback>
@@ -163,6 +170,20 @@ watch(router.currentRoute, () => {
   }
 }
 
+.header__logo--mobile {
+  width: 50px;
+  height: 50px;
+
+  & > a {
+    background-position: -78px -100px;
+    background-size: 350px 250px;
+  }
+}
+
+.nav__item {
+  color: #fff;
+}
+
 .nav__item + .nav__item {
   margin-left: 1rem;
 }
@@ -170,4 +191,11 @@ watch(router.currentRoute, () => {
 .main {
   grid-area: main;
 }
+
+@media(min-width: 375px) {
+  .nav--mobile .nav__item + .nav__item {
+    margin-left: 0
+  }
+}
+
 </style>
