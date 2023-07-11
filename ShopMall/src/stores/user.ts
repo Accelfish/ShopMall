@@ -9,16 +9,28 @@ export const useUser =
             const userData = reactive({data: existsUserData ? JSON.parse(existsUserData) : null});
             const isLogin = computed(() => userData.data !== null);
             const user = computed(() => userData.data);
-            const login = async (username: string, password: string, redirect: string) => {
+            const login = async (account: string, password: string, redirect: string) => {
+                if (!redirect) {
+                    redirect = '/'
+                }
+                const userList = [
+                    { id: 1, account: 'admin', password: 'admin'},
+                    { id: 2, account: 'Kriz', password: '1234'},
+                ];
+
                 try {
-                    //const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
-                    const user = {id: 1, name: 'Kriz', account: username, password: password, token: 'fake-jwt-token'};
-                    // update pinia state
-                    userData.data = user;
-                    // store user details and jwt in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('user', JSON.stringify(user));
-                    await router.push({path: redirect});
+                    const targetMember = userList.find(user => user.account === account && user.password === password);
+                    if (targetMember) {
+                        const user = {account: account, password: password, token: 'fake-jwt-token'};
+                        userData.data = user;
+                        // store user details and jwt in local storage to keep user logged in between page refreshes
+                        localStorage.setItem('user', JSON.stringify(user));
+                        await router.push({path: redirect});
+                    } else {
+                        throw 'Username or password is incorrect'
+                    }
                 } catch (error) {
+                    alert(error);
                 }
             };
 
