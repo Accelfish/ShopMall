@@ -1,4 +1,4 @@
-import type { IProduct, IStore } from '../modal/IProduct';
+import type {IProduct, IStore} from '../modal/IProduct';
 
 export default class Product implements IProduct {
     // 編號

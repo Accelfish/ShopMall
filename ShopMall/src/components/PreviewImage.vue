@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import placeholderImage from '@/assets/images/online-shopping.png';
-import {computed, reactive, watch, ref, onMounted, watchEffect, nextTick} from 'vue';
+import {computed, reactive, watch, ref, onMounted} from 'vue';
 import type {Ref} from 'vue'
 import useCursorPosinEle from "@/compositions/useCursorPosinEle";
 
@@ -11,9 +11,10 @@ interface IPreviewImg {
   preview?: boolean,
 }
 
-const handleReplaceLazyLoadingImage = function (event: { target: { src: string; onerror: null; }; }) {
-  event.target.src = placeholderImage;
-  event.target.onerror = null;
+const handleReplaceLazyLoadingImage = function (event:Event) {
+  const target = event.target as HTMLImageElement;
+  target.src = placeholderImage;
+  target.onerror = null;
 }
 
 
@@ -53,9 +54,9 @@ const zoomViewSize = reactive({
 
 const isShowZoomContainer = ref(false);
 
-const zoomContainer: Ref<HTMLElement> = ref();
-const imgTarget: Ref<HTMLElement> = ref();
-const imgContainer: Ref<HTMLElement> = ref();
+const zoomContainer: Ref<HTMLElement | null> = ref(null);
+const imgTarget: Ref<HTMLElement | null> = ref(null);
+const imgContainer: Ref<HTMLElement | null> = ref(null);
 
 const defaultRatio: Ref<number> = ref(1);
 onMounted(() => {
@@ -69,20 +70,22 @@ const ratio = computed(() => {
 const resizeZoomZone = () => {
   if (imgTarget.value) {
     zoomZoneSize.width = zoomZoneSize.height = DEFAULT_ZOOM_ZONE_SIZE * defaultRatio.value;
-    imgContainerSize.width = imgContainer.value.clientWidth;
-    imgContainerSize.height = imgContainer.value.clientHeight;
+    if(imgContainer.value) {
+      imgContainerSize.width = imgContainer.value.clientWidth;
+      imgContainerSize.height = imgContainer.value.clientHeight;
+    }
   }
 }
 
-const UpdZoomZoneSize = () => {
+const UpdZoomZoneSize = (event:WheelEvent) => {
   if (zoomZoneSize.width + event.deltaY * 0.01 <= imgContainerSize.width
-    && zoomZoneSize.height + event.deltaY * 0.01 <= imgContainerSize.height) {
-      zoomZoneSize.width = zoomZoneSize.width += event.deltaY * 0.01;
-      zoomZoneSize.height = zoomZoneSize.height += event.deltaY * 0.01;
-    }
+      && zoomZoneSize.height + event.deltaY * 0.01 <= imgContainerSize.height) {
+    zoomZoneSize.width = zoomZoneSize.width += event.deltaY * 0.01;
+    zoomZoneSize.height = zoomZoneSize.height += event.deltaY * 0.01;
+  }
 }
 
-const moveZoomContainer = () => {
+const moveZoomContainer = (event: MouseEvent) => {
   if (event && zoomContainer.value) {
     const data = useCursorPosinEle(zoomContainer.value, event);
     pos.left = data.posX;

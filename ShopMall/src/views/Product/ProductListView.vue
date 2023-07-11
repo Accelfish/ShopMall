@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {reactive, ref, computed, watch, onMounted} from "vue";
+import {ref, computed, onMounted} from "vue";
 import type {ComputedRef, Ref} from "vue";
 import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 import type {LocationQueryValue} from 'vue-router';
-import Product from "@/entities/product";
+import type Product from "@/entities/product";
 import Card from '@/components/Card.vue';
 import Pagination from '@/components/Pagination.vue';
 import Rating from "@/components/Rating.vue";
@@ -20,17 +20,17 @@ const page: number = route.query.page ? parseInt(route.query.page as string, 10)
 const filterMinPrice: number | null = queryMinPrice ? parseInt(queryMinPrice.toString(), 10) : null;
 const filterMaxPrice: number | null = queryMaxPrice ? parseInt(queryMaxPrice.toString(), 10) : null;
 
-const currentPage:Ref<number> = ref(page);
-const currentRate:Ref<number> = ref(parseInt(route.query.rate as string, 10));
-const currentMinPrice:Ref<number|null> = ref(filterMinPrice);
-const currentMaxPrice:Ref<number|null> = ref(filterMaxPrice);
-const keyword:Ref<string> = ref(route.query.keyword as string);
+const currentPage: Ref<number> = ref(page);
+const currentRate: Ref<number> = ref(parseInt(route.query.rate as string, 10));
+const currentMinPrice: Ref<number | null> = ref(filterMinPrice);
+const currentMaxPrice: Ref<number | null> = ref(filterMaxPrice);
+const keyword: Ref<string> = ref(route.query.keyword as string);
 
 onBeforeRouteUpdate(async (to, from) => {
   keyword.value = to.query.keyword ? to.query.keyword as string : '';
-  if(keyword.value){
-    if(from.query.keyword) {
-      if(keyword.value !== from.query.keyword) {
+  if (keyword.value) {
+    if (from.query.keyword) {
+      if (keyword.value !== from.query.keyword) {
         setCurrentPage(1);
       }
     }
@@ -140,7 +140,6 @@ const showProductList: ComputedRef<Product[]> = computed(() => {
 })
 
 
-
 </script>
 <template>
   <div class="flex">
@@ -150,9 +149,11 @@ const showProductList: ComputedRef<Product[]> = computed(() => {
           <div class="filterPannel__title">價格</div>
           <div class="filterPannel__content">
             <div class="filterPannel__inputGroup flex">
-              <input class="w-16 md:mr-1" v-model.number="currentMinPrice" type="text" placeholder="$ 最小值"
+              <input class="w-16 md:mr-1 focus:outline-none" v-model.number="currentMinPrice" type="text"
+                     placeholder="$ 最小值"
                      maxlength="13"/>~
-              <input class="w-16 md:ml-1 md:pl-1" v-model.number="currentMaxPrice" type="text" placeholder="$ 最大值"
+              <input class="w-16 md:ml-1 md:pl-1 focus:outline-none" v-model.number="currentMaxPrice" type="text"
+                     placeholder="$ 最大值"
                      maxlength="13"/>
             </div>
             <div class="filterPannel__button">

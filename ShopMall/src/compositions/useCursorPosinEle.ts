@@ -1,8 +1,8 @@
 import {computed} from 'vue';
 
-export default (htmlEle:HTMLElement, event: MouseEvent) => {
+export default (htmlEle: HTMLElement, event: MouseEvent) => {
     //get cursor position in htmlEle
-    const pos = computed(()=>{
+    const pos = computed(() => {
         let x = 0;
         let y = 0;
         /* Get the x and y positions of the image: */

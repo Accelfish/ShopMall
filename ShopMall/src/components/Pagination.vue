@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, toRefs, watch} from "vue";
+import {toRefs} from "vue";
 import usePaginator from "@/compositions/usePaginator";
 
 interface IPagination {
@@ -49,8 +49,8 @@ function updateCurrentPage(page: number) {
 <template>
   <div class="pagination w-full m-0 p-0 inline-flex justify-between list-none">
     <button class="pagination__item pagination__arrow"
-        :disabled="!hasPrev"
-        @click="updateCurrentPage(goPrev())"
+            :disabled="!hasPrev"
+            @click="updateCurrentPage(goPrev())"
     >
       <svg class="pagination__icon"
            enable-background="new 0 0 11 11"
@@ -88,7 +88,8 @@ function updateCurrentPage(page: number) {
 </template>
 
 <style scoped>
-.pagination {}
+.pagination {
+}
 
 .pagination__item {
   border: 0;
@@ -115,7 +116,7 @@ function updateCurrentPage(page: number) {
   height: 1em;
 }
 
-@media(min-width: 375px) {
+@media (min-width: 375px) {
   .pagination__item {
     min-width: 1.5rem;
     margin-left: 0.35375rem;
@@ -125,7 +126,7 @@ function updateCurrentPage(page: number) {
   }
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   .pagination__item {
     min-width: 2.5rem;
     margin-left: 0.9375rem;
