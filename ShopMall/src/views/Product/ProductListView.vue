@@ -3,11 +3,12 @@ import {ref, computed, onMounted} from "vue";
 import type {ComputedRef, Ref} from "vue";
 import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 import type {LocationQueryValue} from 'vue-router';
-import type Product from "@/entities/product";
+import ProductInst from "../../entities/productInst";
+
 import Card from '@/components/Card.vue';
 import Pagination from '@/components/Pagination.vue';
 import Rating from "@/components/Rating.vue";
-import axios from "axios";
+import api from "@/api/api";
 
 const rateRage: Array<number> = [5, 4, 3, 2, 1];
 
@@ -79,45 +80,44 @@ const getQuery = computed(() => {
 
 const isLoading: Ref<boolean> = ref(true);
 const perPage: Ref<number> = ref(12);
-let products: Ref<Product[]> = ref([]);
+let products: Ref<ProductInst[]> = ref([]);
 
-async function getProducts(): Promise<Product[]> {
-  let pd: Product[] = [];
+async function getProducts(): Promise<ProductInst[]> {
+  let productList:ProductInst[] = [];
   try {
-
-    let result = await axios.get('/data.json?' + getQuery.value.queryString);
-    let productList: Product[] = result.data;
+    productList = await api.getProductList(getQuery.value.value);
     if (currentMinPrice.value) {
       const minPrice = currentMinPrice.value;
-      productList = productList.filter((item: Product) => item.sellPrice >= minPrice || item.price >= minPrice);
+      productList = productList.filter((item: ProductInst) => item.sellPrice >= minPrice || item.price >= minPrice);
     }
 
     if (currentMaxPrice.value) {
       const maxPrice = currentMaxPrice.value;
-      productList = productList.filter((item: Product) => item.sellPrice <= maxPrice || item.price <= maxPrice);
+      productList = productList.filter((item: ProductInst) => item.sellPrice <= maxPrice || item.price <= maxPrice);
     }
 
     if (currentRate.value) {
       const filterRate = currentRate.value;
-      productList = productList.filter((item: Product) => item.rating >= filterRate);
+      productList = productList.filter((item: ProductInst) => item.rating >= filterRate);
     }
 
     if (keyword.value) {
       const filterKeyword = keyword.value;
-      productList = productList.filter((item: Product) => item.name.indexOf(filterKeyword) > -1);
+      productList = productList.filter((item: ProductInst) => item.name.indexOf(filterKeyword) > -1);
     }
 
-    pd = productList.map((item: Product) => {
-      item.onSell ? item.url = `/${item.id}` : ''
+    productList.forEach((item: ProductInst)=>{
+      item.url = item.onSell ?`/${item.id}` : '';
       return item;
     });
+
   } catch (e) {
     console.log(e);
-    alert('get Product Error');
+    alert('get ProductInst Error');
   } finally {
     isLoading.value = false;
   }
-  return pd;
+  return productList;
 }
 
 const updateCurrentPage = (toPage: number) => {
@@ -131,7 +131,7 @@ const updateCurrentPage = (toPage: number) => {
   });
 }
 
-const showProductList: ComputedRef<Product[]> = computed(() => {
+const showProductList: ComputedRef<ProductInst[]> = computed(() => {
   const pd = [...products.value];
   const begin: number = currentPage.value === 1 ? 0 : (currentPage.value - 1) * perPage.value;
   const end: number = begin + perPage.value <= pd.length ? begin + perPage.value : pd.length;

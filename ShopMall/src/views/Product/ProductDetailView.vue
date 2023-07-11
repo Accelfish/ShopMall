@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import {reactive, ref, computed, watch, onMounted} from "vue";
+import {reactive, ref, onMounted} from "vue";
 import type {Ref} from 'vue';
 import {useRoute, useRouter} from "vue-router";
-import Product from "@/entities/product";
-import axios from "axios";
+import ProductInst from "../../entities/productInst";
+import {CartItem} from "../../entities/cartInst";
+import StoreInst from "../../entities/storeInst";
+
+import api from '@/api/api';
 import PreviewImage from "@/components/PreviewImage.vue";
 import Rating from "@/components/Rating.vue";
 import NumberInput from "@/components/NumberInput.vue";
 import {useDeviceDetector} from "@/compositions/useDevice";
+import {useUser} from "@/stores/user";
+import {useCart} from "@/stores/cart";
 
 const route = useRoute();
 const router = useRouter();
@@ -15,49 +20,80 @@ const pid: number = parseInt(route.params.id as string);
 const isLoading: Ref<boolean> = ref(true);
 const deviceDetector = useDeviceDetector();
 const isMobile: Ref<boolean> = ref(deviceDetector.mobile);
+const {isLogin} = useUser();
+const {addProduct} = useCart();
 
 const addCartCount: Ref<number> = ref(1);
 
-let product: Product = reactive({
-  id: 0,
-  name: '',
-  price: 0,
-  sellPrice: 0,
-  additionPrice: 0,
-  inventory: 0,
-  rating: 0,
-  store: {
-    id: 0,
-    name: '',
-    description: '',
-    rating: 0
-  },
-  onSell: true,
-  description: '',
-  image: '',
-});
+let product: ProductInst = reactive(new ProductInst(
+    0,
+    '',
+    0,
+    0,
+    0,
+    0,
+    new StoreInst(0, '', 0, '', ''),
+    false,
+    0,
+    '',
+    '',
+));
 
 onMounted(async () => {
-      try {
-        const productList = await axios.get('/data.json').then(res => res.data);
-        const tmp = productList.filter((item: Product) => item.id === pid);
-        if (tmp.length > 0) {
-          product = tmp[0];
-          if (!product.onSell) {
-            alert('Not On Sell');
-            await router.replace({name: 'productList'});
-          }
-        } else {
-          await router.replace({name: 'notFound'});
-        }
-      } catch (e) {
-        alert('Get Error');
-        await router.replace({name: 'notFound'});
-      } finally {
-        isLoading.value = false;
+  try {
+    const productDetail: ProductInst = await api.getProductDetail(pid);
+
+    if (productDetail) {
+      product = productDetail;
+      if (!product.onSell) {
+        alert('Not On Sell');
+        await router.replace({name: 'productList'});
       }
+    } else {
+      await router.replace({name: 'notFound'});
     }
-)
+  } catch (e) {
+    console.log(e);
+    alert('Get Error');
+    await router.replace({name: 'notFound'});
+  } finally {
+    isLoading.value = false;
+  }
+})
+
+const addProductToCart = async () => {
+  if (!isLogin) {
+    await router.push({name: 'login', query: {redirect: route.path}});
+    return;
+  }
+
+  if (product.inventory === 0) {
+    alert('No Inventory');
+    return;
+  }
+  try{
+    await addProduct(new CartItem(
+        false,
+        product.id,
+        product.name,
+        product.sellPrice,
+        addCartCount.value,
+        new StoreInst(product.store.id,
+            product.store.name,
+            product.store.rating,
+            product.store.description,
+            product.store.image,),
+        product.onSell,
+        product.inventory,
+        product.image,
+    ));
+    alert('加入購物車成功');
+  } catch(e: any) {
+    alert(e.message);
+    //await router.push('/');
+  }
+}
+
 </script>
 <template>
   <div class="product__container
@@ -93,8 +129,6 @@ onMounted(async () => {
           </template>
           <span v-else>未有評價</span>
         </div>
-        <!--      {{product.id}}-->
-        <!--      {{product.onSell}}-->
         <div class="product__price p-4">
           <span v-if="product.price > product.sellPrice"
                 class="line-through mr-1 text-gray-400">
@@ -108,7 +142,7 @@ onMounted(async () => {
       <div class="info__body">
         <div class="cart">
           <div class="flex items-center h-11">
-            <NumberInput :min-value="1" :max-value="product.inventory" v-model="addCartCount"/>
+            <NumberInput :min-value="1" :max-value="product.inventory" v-model:modelValue="addCartCount"/>
             <div class="product__inventory h-full flex items-center text-gray-400">
               <span>
                 庫存：
@@ -121,7 +155,9 @@ onMounted(async () => {
           <div class="cart__msg" v-show="addCartCount===product.inventory">
             <span class="text-red-500">已達到購買上限</span>
           </div>
-          <button class="rounded px-5 py-3 py-1 bg-gray-700 text-white mt-4">
+          <button class="rounded px-5 py-3 py-1 bg-gray-700 text-white mt-4"
+                  :disabled="product.inventory <= 0"
+                  @click="addProductToCart">
             加入購物車
           </button>
         </div>
