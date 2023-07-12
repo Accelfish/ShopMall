@@ -6,6 +6,7 @@ interface ICard {
   url: string,
   isZoomImg: boolean,
   img?: string,
+  useGrayPreviewImage?: boolean,
   isLazyLoading?: boolean,
 }
 
@@ -14,6 +15,7 @@ const props = withDefaults(defineProps<ICard>(), {
   img: '',
   isZoomImg: false,
   isLazyLoading: true,
+  useGrayPreviewImage: false,
 });
 
 
@@ -29,6 +31,7 @@ const props = withDefaults(defineProps<ICard>(), {
                 :title="props.title"
                 :img="props.img"
                 :preview="false"
+                :useGrayPreviewImage="false"
             />
           </div>
         </slot>
@@ -55,6 +58,7 @@ const props = withDefaults(defineProps<ICard>(), {
                 :title="props.title"
                 :img="props.img"
                 :preview="false"
+                :useGrayPreviewImage="false"
             />
           </div>
         </slot>
