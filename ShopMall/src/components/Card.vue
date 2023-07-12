@@ -8,6 +8,7 @@ interface ICard {
   url: string,
   isZoomImg: boolean,
   img?: string,
+  useGrayPreviewImage?: boolean,
   isLazyLoading?: boolean,
 }
 
@@ -16,6 +17,7 @@ const props = withDefaults(defineProps<ICard>(), {
   img: '',
   isZoomImg: false,
   isLazyLoading: true,
+  useGrayPreviewImage: false,
 });
 
 
@@ -31,6 +33,7 @@ const props = withDefaults(defineProps<ICard>(), {
                 :title="props.title"
                 :img="props.img"
                 :preview="false"
+                :useGrayPreviewImage="false"
             />
           </div>
         </slot>
@@ -49,29 +52,30 @@ const props = withDefaults(defineProps<ICard>(), {
   </RouterLink>
   <div class="flex justify-center" v-else>
     <div class="card group ">
-    <div class="card__head">
-      <slot name="head">
-        <div class="card__img" :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
-          <PreviewImage
-              :isLazyLoading=props.isLazyLoading
-              :title="props.title"
-              :img="props.img"
-              :preview="false"
-          />
-        </div>
-      </slot>
+      <div class="card__head">
+        <slot name="head">
+          <div class="card__img" :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
+            <PreviewImage
+                :isLazyLoading=props.isLazyLoading
+                :title="props.title"
+                :img="props.img"
+                :preview="false"
+                :useGrayPreviewImage="false"
+            />
+          </div>
+        </slot>
+      </div>
+      <div class="card__body">
+        <slot name="body">
+          <div class="card__title">
+            {{ props.title }}
+          </div>
+        </slot>
+      </div>
+      <div class="card__footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
-    <div class="card__body">
-      <slot name="body">
-        <div class="card__title">
-          {{ props.title }}
-        </div>
-      </slot>
-    </div>
-    <div class="card__footer">
-      <slot name="footer"></slot>
-    </div>
-  </div>
   </div>
 </template>
 <style scoped lang="scss">

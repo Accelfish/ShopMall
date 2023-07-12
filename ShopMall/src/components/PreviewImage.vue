@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import placeholderImage from '@/assets/images/online-shopping.png';
+import placeholderImageDark from '@/assets/images/online-shopping_dark.png';
+
 import {computed, reactive, watch, ref, onMounted, watchEffect, nextTick} from 'vue';
 import type {Ref} from 'vue'
 import useCursorPosinEle from "@/compositions/useCursorPosinEle";
@@ -7,6 +9,7 @@ import useCursorPosinEle from "@/compositions/useCursorPosinEle";
 interface IPreviewImg {
   isLazyLoading: boolean,
   title: string,
+  useGrayPreviewImage?: boolean,
   img?: string,
   preview?: boolean,
 }
@@ -20,6 +23,7 @@ const handleReplaceLazyLoadingImage = function (event: { target: { src: string; 
 const props = withDefaults(defineProps<IPreviewImg>(), {
   img: placeholderImage,
   title: '',
+  useGrayPreviewImage: false,
   isLazyLoading: false,
   preview: true,
 });
@@ -51,6 +55,8 @@ const zoomViewSize = reactive({
   height: 300,
 });
 
+const isLoaded = ref(false);
+
 const isShowZoomContainer = ref(false);
 
 const zoomContainer: Ref<HTMLElement> = ref();
@@ -68,13 +74,16 @@ const ratio = computed(() => {
 
 const resizeZoomZone = () => {
   if (imgTarget.value) {
+    setTimeout(() => isLoaded.value = true, 1000)
     zoomZoneSize.width = zoomZoneSize.height = DEFAULT_ZOOM_ZONE_SIZE * defaultRatio.value;
-    imgContainerSize.width = imgContainer.value.clientWidth;
-    imgContainerSize.height = imgContainer.value.clientHeight;
+    if (imgContainer.value) {
+      imgContainerSize.width = imgContainer.value.clientWidth;
+      imgContainerSize.height = imgContainer.value.clientHeight;
+    }
   }
 }
 
-const UpdZoomZoneSize = () => {
+const UpdZoomZoneSize = (event: WheelEvent) => {
   if (zoomZoneSize.width + event.deltaY * 0.01 <= imgContainerSize.width
     && zoomZoneSize.height + event.deltaY * 0.01 <= imgContainerSize.height) {
       zoomZoneSize.width = zoomZoneSize.width += event.deltaY * 0.01;
@@ -129,7 +138,15 @@ watch([pos, zoomZoneSize], (newVal, oldVal) => {
          @wheel.prevent="UpdZoomZoneSize"
          ref="zoomContainer">
       <picture>
-        <img class="imgContainer__target block m-0 "
+        <img :class="{'hidden': isLoaded}"
+             class="imgContainer__target block m-0 "
+             :src="props.useGrayPreviewImage ? placeholderImageDark : placeholderImage"
+             :alt="title"
+        >
+        <img :style="{'visiable': isLoaded ? 'visible':'hidden',
+                       'width': isLoaded ? 'auto':'0',
+                       'height': isLoaded ? 'auto':'0'}"
+             class="imgContainer__target m-0"
              @error="handleReplaceLazyLoadingImage"
              @load="resizeZoomZone"
              :src="img"
@@ -137,17 +154,17 @@ watch([pos, zoomZoneSize], (newVal, oldVal) => {
              :loading="isLazyLoading? 'lazy' : 'auto'"
              ref="imgTarget"
         >
-        <source :srcset="img">
+        <source :class="{'hidden':!isLoaded}" :srcset="img">
       </picture>
       <div class="imgContainer__zoomZone"
-           v-show="props.preview && isShowZoomContainer"
+           v-show="props.preview && isShowZoomContainer && isLoaded"
            :style="{ 'left': `${zoomZonePos.left}px`, 'top':`${zoomZonePos.top}px`,
                      'width': `${zoomZoneSize.width}px`, 'height': `${zoomZoneSize.height}px` }">
       </div>
     </div>
     <div class="imgContainer__zoomView"
          ref="zoomView"
-         v-show="props.preview && isShowZoomContainer"
+         v-show="props.preview && isShowZoomContainer && isLoaded"
          :style="{'background-image': `url(${props.img})`,
          'background-repeat': 'no-repeat',
          'background-size': imgTarget ? `${imgContainerSize.width * ratio}px ${imgContainerSize.height * ratio}px` : 'auto',

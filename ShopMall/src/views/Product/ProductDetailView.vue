@@ -77,6 +77,7 @@ onMounted(async () => {
             :isLazyLoading="true"
             :img="product.image"
             :preview="!isMobile && !!product.image"
+            :useGrayPreviewImage="true"
         />
       </div>
     </div>
