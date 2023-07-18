@@ -102,14 +102,13 @@ const isCheckAll = computed({
 
 <template>
   <div class="relative cart" v-if="cart.length">
-    <div class="cart__list">
-      <div class="bg-gray-200 flex px-6 py-4 items-center cartItem">
-        <div class="w-10">
+    <div class="cart__list bg-gray-200 pb-4">
+      <div class="flex items-center cartItem" :class="[!isMobile ? 'px-6 py-4' : 'px-2 py-1']">
+        <div :class="[isMobile ? 'w-5' : 'w-10']">
           <input v-model="isCheckAll" type="checkbox">
         </div>
-        <div class="w-20 flex-none mr-10" :class="{'mr-0' : isMobile}">
-        </div>
-        <div class="flex-1 flex items-center">
+        <div class="w-20 flex-none" :class="[isMobile ? 'mr-0' : 'mr-10']"></div>
+        <div v-show="!isMobile" class="flex-1 flex items-center">
           <div class="w-full">
             商品
           </div>
@@ -123,29 +122,37 @@ const isCheckAll = computed({
           </div>
         </div>
       </div>
-      <div class="bg-gray-200 flex px-6 py-4 items-center cartItem" v-for="cartItem in cart" :key="cartItem.productId">
-        <div class="w-10">
+      <div class="flex items-center cartItem" v-for="cartItem in cart" :key="cartItem.productId">
+        <div :class="[!isMobile ? 'px-6 py-4' : 'px-2 py-1']">
           <input v-model="cartItem.isCheck" type="checkbox">
         </div>
-        <div class="w-20 h-20 flex-none mr-10" :class="{'mr-0' : isMobile}">
-          <img :src="cartItem.image?cartItem.image:placeholderImage" alt="" class="w-full h-full">
+        <div class="w-20 h-20 flex-none" :class="[isMobile ? 'mr-0' : 'mr-10']">
+          <img :src="cartItem.image?cartItem.image:placeholderImage" alt="" class="object-contain w-full h-full">
         </div>
-        <div class="flex-1 flex items-center">
-          <div class="w-full">
-            {{ cartItem.name }}
+        <div class="flex-1 flex items-center" :class="{'flex-col':isMobile}">
+          <div class="w-full flex justify-between items-center">
+            <div class="text-base">
+              {{ cartItem.name }}
+            </div>
+            <div v-show="isMobile">
+              <button class="p-2" type="button" @click="remove(cartItem)">
+                <font-awesome-icon icon="fa-solid fa-trash"/>
+              </button>
+            </div>
           </div>
-          <div class="w-full">
+          <div class="w-full text-base">
             ${{ cartItem.price }}
           </div>
-          <div class="w-full h-14 max-h-14">
+          <div class="w-full" :class="[isMobile? 'h-10' : 'h-14']">
             <NumberInput
                 :model-value="cartItem.quantity"
-                @update:modelValue="changeQuantity(cartItem, $event)"
+                @update:modelValue="changeQuantity(cartItem, $event as number)"
+                :is-show-button="true"
                 :min-value="1"
                 :max-value="cartItem.inventory"
             />
           </div>
-          <div class="w-20">
+          <div class="w-20" v-show="!isMobile">
             <button class="p-2" type="button" @click="remove(cartItem)">
               <font-awesome-icon icon="fa-solid fa-trash"/>
             </button>
@@ -154,11 +161,11 @@ const isCheckAll = computed({
       </div>
     </div>
     <div ref="cartCheckout" class="cart__checkout sticky bottom-0 left-0 w-full bg-gray-700">
-      <div class="flex justify-end items-center p-2">
-        <div class="text-white mr-4">
+      <div class="flex flex-col items-end p-2">
+        <div class="text-white mb-4 text-base">
           總金額（共 {{ totalCount.count }} 種商品）：$ {{ totalCount.totalPrice }}
         </div>
-        <button type="button" class="rounded px-3 py-2 bg-white" @click="checkout">
+        <button type="button" class="rounded px-3 py-1 bg-white" @click="checkout">
           結帳
         </button>
       </div>

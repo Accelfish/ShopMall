@@ -11,11 +11,12 @@ import {
     faCartShopping,
     faEye,
     faEyeSlash,
-    faTrash
+    faTrash,
+    faUser
 } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
-library.add(faStore, faMagnifyingGlass, faCartShopping, faEye, faEyeSlash, faTrash);
+library.add(faStore, faMagnifyingGlass, faCartShopping, faEye, faEyeSlash, faTrash, faUser);
 
 const pinia = createPinia()
 const app = createApp(App)

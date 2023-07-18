@@ -6,9 +6,10 @@ import {useCart} from "@/stores/cart";
 import {useDeviceDetector} from "@/compositions/useDevice";
 import type {ICartItem} from "@/modal/ICart";
 import {useUser} from "@/stores/user";
-import {onMounted, onUnmounted, ref, reactive, computed, watch} from "vue";
+import {onMounted, ref, reactive, computed, watch} from "vue";
 import type {IUser} from "@/modal/IUser";
 import {EDelivery, EInvoice, EPayment, EPersonalInvoice} from "@/enum/Enums";
+import api from "@/api/api";
 
 const deviceDetector = useDeviceDetector();
 const userStore = useUser();
@@ -48,23 +49,27 @@ interface ICheckout {
 
 const {cart} = storeToRefs(cartStore);
 
-onMounted(
-    () => {
-      if (!isLogin.value) {
-        router.push({name: 'login'});
-      }
+const checkoutCartItem = cart.value.filter(item=>item.isCheck)
 
-      if (cart.value.length === 0) {
-        router.replace({name: 'cart'});
-      }
+
+onMounted(
+  () => {
+    if (!isLogin.value) {
+      router.push({name: 'login'});
     }
+
+    if (checkoutCartItem.length === 0) {
+      router.replace({name: 'cart'});
+    }
+  }
 )
 
-
 const checkout: ICheckout = reactive({
-  products: cart.value,
-  totalPrice: 0,
-  totalQuantity: cart.value.length,
+  products: checkoutCartItem,
+  totalPrice: checkoutCartItem.reduce((pre: number, cur: ICartItem) => {
+                          return pre + cur.price * cur.quantity;
+                        }, 0),
+  totalQuantity: checkoutCartItem.length,
   payment: 0,
   invoice: {
     type: 0,
@@ -90,77 +95,80 @@ watch(() => checkout.delivery.type, (newVal) => {
 });
 
 const totalPrice = computed(() => {
-  const productPrice = checkout.products.reduce((pre: number, cur: ICartItem) => {
-    return pre + cur.price * cur.quantity;
-  }, 0);
-
+  const productPrice = checkout.totalPrice;
   const deliveryPrice = checkout.delivery.cost;
   return productPrice + deliveryPrice;
 });
 
-const valid = () => {
+const valid = computed(() => {
   const validResult = {
     products: {status: false, message: ''},
     payment: {status: false, message: ''},
     invoice: {status: false, message: ''},
     delivery: {status: false, message: ''},
     recipient: {status: false, message: ''},
-  }
+  };
 
   if (!checkout.products.length
       || checkout.products.filter(item => item.quantity <= 0).length
       || checkout.products.filter(item => !item.onSell).length) {
     validResult.products.status = true;
-    validResult.products.message = '沒有可結帳的商品'
+    validResult.products.message = '沒有可結帳的商品';
   }
 
   if (!checkout.payment) {
     validResult.payment.status = true;
-    validResult.payment.message = '請選擇付款方式'
+    validResult.payment.message = '請選擇付款方式';
   }
 
   if (!checkout.invoice.type) {
     validResult.invoice.status = true;
-    validResult.invoice.message = '請選擇發票類型'
+    validResult.invoice.message = '請選擇發票類型';
   } else if (!checkout.invoice.value.value) {
     validResult.invoice.status = true;
-    validResult.invoice.message = '請輸入發票詳細資料'
+    validResult.invoice.message = '請輸入發票詳細資料';
   }
 
   if (!checkout.delivery.type) {
     validResult.delivery.status = true;
-    validResult.delivery.message = '請選擇取貨方式'
+    validResult.delivery.message = '請選擇取貨方式';
   } else if (checkout.delivery.type === EDelivery.ConvenienceStore && !checkout.delivery.address) {
     validResult.delivery.status = true;
-    validResult.delivery.message = '請輸入取貨門市'
+    validResult.delivery.message = '請輸入取貨門市';
   } else if (checkout.delivery.type === EDelivery.Home && !checkout.delivery.address) {
     validResult.delivery.status = true;
-    validResult.delivery.message = '請輸入收件地址'
+    validResult.delivery.message = '請輸入收件地址';
   }
 
   if (!checkout.recipient.name) {
     validResult.recipient.status = true;
-    validResult.recipient.message = '請輸入收件人姓名'
+    validResult.recipient.message = '請輸入收件人姓名';
   } else if (!checkout.recipient.phone) {
     validResult.recipient.status = true;
-    validResult.recipient.message = '請輸入收件人電話'
+    validResult.recipient.message = '請輸入收件人電話';
   }
 
   return {
     result: validResult,
     isValid: !Object.values(validResult).some(item => item.status),
   };
-}
+});
 
-const checkOrder = () => {
-  console.log('checkout');
+const checkOrder = async () => {
+  console.log('checkOrder');
   checkout.totalPrice = totalPrice.value;
-  const {result, isValid} = valid();
+  const {isValid} = valid.value;
   if (!isValid) {
-    console.log(result);
+    alert('請填寫訂單資訊');
     return;
   }
-  router.push({name: 'checkoutResult'});
+
+  try {
+    const res = await api.createOrder(checkout);
+    await router.push({name: 'checkoutResult', query: {orderId: res.data.orderId, isSuccess: 'true'} });
+  } catch (e) {
+    await router.push({name: 'checkoutResult', query: {orderId: 0, isSuccess: 'false'} });
+  }
 }
 
 </script>
@@ -170,7 +178,7 @@ const checkOrder = () => {
     <div class="checkout__list mb-3 bg-gray-200">
       <div class="flex px-6 py-2 items-center cartItem">
         <div class="flex-1 flex items-center">
-          <div class="w-20 flex-none mr-10" :class="{'mr-0' : isMobile}">
+          <div class="w-20 flex-none" :class="[isMobile ? 'mr-0' : 'mr-10']">
           </div>
           <div class="w-full">
             商品
@@ -186,9 +194,9 @@ const checkOrder = () => {
           </div>
         </div>
       </div>
-      <div class="flex px-6 py-4 items-center cartItem" v-for="cartItem in cart" :key="cartItem.productId">
-        <div class="w-20 h-20 flex-none mr-10" :class="{'mr-0' : isMobile}">
-          <img :src="cartItem.image?cartItem.image:placeholderImage" alt="" class="w-full h-full">
+      <div class="flex px-6 py-4 items-center cartItem" v-for="cartItem in checkout.products" :key="cartItem.productId">
+        <div class="w-20 h-20 flex-none" :class="[isMobile ? 'mr-0' : 'mr-10']">
+          <img :src="cartItem.image ? cartItem.image : placeholderImage" alt="" class="w-full h-full">
         </div>
         <div class="flex-1 flex items-center">
           <div class="w-full">
@@ -229,6 +237,9 @@ const checkOrder = () => {
                      id="PaymentCash">
               <label class="text-base" for="PaymentCash">貨到付款</label>
             </div>
+          </div>
+          <div class="checkout__msg" v-show="valid.result.payment.status">
+            <span class="text-red-500">{{valid.result.payment.message}}</span>
           </div>
         </div>
         <div class="checkout__item checkout__item--invoice pb-3">
@@ -290,6 +301,9 @@ const checkOrder = () => {
               </div>
             </div>
           </div>
+          <div class="checkout__msg" v-show="valid.result.invoice.status">
+            <span class="text-red-500">{{valid.result.invoice.message}}</span>
+          </div>
         </div>
         <div class="checkout__item checkout__item--delivery pb-3">
           <div class="checkout__title text-lg -mx-6">
@@ -325,6 +339,9 @@ const checkOrder = () => {
                      v-model="checkout.delivery.address">
             </div>
           </div>
+          <div class="checkout__msg" v-show="valid.result.delivery.status">
+            <span class="text-red-500">{{valid.result.delivery.message}}</span>
+          </div>
         </div>
         <div class="checkout__item checkout__item--recipient pb-3">
           <div class="checkout__title text-lg -mx-6">
@@ -347,6 +364,9 @@ const checkOrder = () => {
                        id="RecipientPhone">
               </div>
             </div>
+          </div>
+          <div class="checkout__msg" v-show="valid.result.recipient.status">
+            <span class="text-red-500">{{valid.result.recipient.message}}</span>
           </div>
         </div>
         <div class="checkout__item checkout__item--result pb-3 border-t-2 border-gray-300">
@@ -378,5 +398,9 @@ const checkOrder = () => {
   background-color: black;
   color: white;
   padding: 12px 24px;
+}
+
+.checkout__msg span::before {
+  content: '*';
 }
 </style>
