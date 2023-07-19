@@ -29,16 +29,10 @@ const router = createRouter({
             meta: {title: `商品詳情-${VITE_APP_NAME}`}
         },
         {
-            path: '/store',
+            path: '/store/:storeId',
             name: 'store',
-            component: ProductListView,
+            component: ()=>import('@/views/Store/Store.vue'),
             meta: {title: `商店-${VITE_APP_NAME}`}
-        },
-        {
-            path: '/store/product',
-            name: 'storeProduct',
-            component: ProductListView,
-            meta: {title: `商店商品-${VITE_APP_NAME}`}
         },
         {
             path: '/cart',

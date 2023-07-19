@@ -27,6 +27,11 @@ const {user, isLogin} = storeToRefs(userStore);
 console.log(user.value, isLogin.value);
 const isMobileNavOpen = ref(false);
 const keyword = ref(route.query.keyword as string);
+const storeId = ref(route.params.id ? parseInt(route.params.storeId as string) : null);
+
+watch(()=>route.params, (newVal)=>{
+  storeId.value = newVal.storeId ? parseInt(newVal.storeId as string) : null;
+})
 
 const toggleMobileNav = () => {
   isMobileNavOpen.value = !isMobileNavOpen.value;
@@ -38,8 +43,18 @@ const closeMobileNav = () => {
 
 const search = () => {
   if (keyword.value.trim() === '') return;
-  router.push({name: 'product', query: {...route.query, keyword: keyword.value.trim()}});
+  if (storeId.value) {
+    router.push({name: 'store', query: {...route.query, keyword: keyword.value.trim(), page: 1}});
+  } else {
+    router.push({name: 'product', query: {...route.query, keyword: keyword.value.trim(), page: 1}});
+  }
 }
+
+watch(()=>route.query.keyword, (newVal, oldVal)=>{
+  if (!newVal) {
+    keyword.value = '';
+  }
+})
 
 watch(() => route.path,
     () => {

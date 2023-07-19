@@ -17,3 +17,8 @@ export enum EPersonalInvoice {
     member = 1,
     barcode = 2,
 }
+
+export enum EProfileIcon {
+    person = 0,
+    store = 1,
+}
