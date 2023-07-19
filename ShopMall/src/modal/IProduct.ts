@@ -1,8 +1,9 @@
 export interface IStore {
     id: number;
     name: string;
+    rating?: number;
     description?: string;
-    rating: number;
+    image?: string;
 }
 
 export interface IGift {
@@ -20,10 +21,20 @@ export interface IProduct {
     name: string;
     price: number;
     sellPrice: number;
-    additionPrice: number;
+    additionPrice?: number;
     image?: string;
     inventory: number;
     description?: string;
     rating: number;
     store: IStore;
+    onSell: boolean;
+    getImage(): string;
+}
+
+export interface IMessage {
+    id: number,
+    name: string,
+    message: string,
+    rating: number,
+    productId: number,
 }

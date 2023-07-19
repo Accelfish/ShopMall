@@ -8,9 +8,8 @@ const defaultOptions: Required<IOptions> = {
     totalButtons: 5,
 };
 
-
-export default (userOptions: IOptions): IPagination => {
-    const options: Required<IOptions> = { ...defaultOptions, ...userOptions }
+function usePaginator (userOptions: IOptions): IPagination {
+    const options: Required<IOptions> = {...defaultOptions, ...userOptions}
     const _currentPage = ref(options.currentPage)
     const pageSize = ref(options.pageSize)
     const totalItems = ref(options.totalItems)
@@ -43,7 +42,7 @@ export default (userOptions: IOptions): IPagination => {
     const hasNext = computed(() => currentPage.value < totalPages.value)
 
     const goPrev = () => {
-        console.log(currentPage.value,hasPrev.value);
+        console.log(currentPage.value, hasPrev.value);
         if (hasPrev.value) {
             return currentPage.value - 1;
         }
@@ -95,7 +94,7 @@ export default (userOptions: IOptions): IPagination => {
 
 function fullButtons(page: number, totalPages: number): Array<IPaginatorButton> {
     return consecutiveSlots(1, page)
-        .concat({ page, active: true, ellipsis: false })
+        .concat({page, active: true, ellipsis: false})
         .concat(consecutiveSlots(page + 1, totalPages + 1))
 }
 
@@ -141,11 +140,11 @@ function partialButtons(
         }
 
         list = (consecutiveSlots(1, ellipsis) as Array<IPaginatorButton>)
-            .concat({ page: ellipsisPage, active: false, ellipsis: true })
+            .concat({page: ellipsisPage, active: false, ellipsis: true})
             .concat(consecutiveSlots(page - remaining, page))
     }
 
-    list.push({ page, active: true, ellipsis: false })
+    list.push({page, active: true, ellipsis: false})
 
     if (pagesNext <= slotsRight) {
         list = list.concat(consecutiveSlots(page + 1, totalPages + 1))
@@ -156,7 +155,7 @@ function partialButtons(
         const ellipsisPage = page + Math.ceil(pagesNext / 2)
 
         list = list.concat(consecutiveSlots(page + 1, page + ellipsis))
-            .concat({ page: ellipsisPage, active: false, ellipsis: true })
+            .concat({page: ellipsisPage, active: false, ellipsis: true})
             .concat(consecutiveSlots(totalPages - remaining + 1, totalPages + 1))
     }
 
@@ -166,7 +165,9 @@ function partialButtons(
 function consecutiveSlots(startIdx: number, endIdx: number): Array<IPageButton> {
     const result: Array<IPageButton> = []
     for (let idx = startIdx; idx < endIdx; idx++) {
-        result.push({ page: idx, active: false, ellipsis: false })
+        result.push({page: idx, active: false, ellipsis: false})
     }
     return result
 }
+
+export {usePaginator}

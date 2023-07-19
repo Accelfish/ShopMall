@@ -1,229 +1,262 @@
 [
-  {
-    "id": 1,
-    "name": "Product 1",
-    "price": 783,
-    "sellPrice": 156,
-    "additionPrice": 92,
-    "inventory": 90,
-    "rating": 2.7,
-    "store": {
-      "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 2,
-    "name": "Product 2",
-    "price": 584,
-    "sellPrice": 196,
-    "additionPrice": 57,
-    "inventory": 52,
-    "rating": 4.7,
-    "store": {
-      "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 3,
-    "name": "Product 3",
-    "price": 444,
-    "sellPrice": 656,
-    "additionPrice": 75,
-    "inventory": 17,
-    "rating": 1.4,
-    "store": {
-      "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 4,
-    "name": "Product 4",
-    "price": 439,
-    "sellPrice": 535,
-    "additionPrice": 24,
-    "inventory": 49,
-    "rating": 2,
-    "store": {
+    {
       "id": 1,
-      "name": "Apple Store",
-      "description": "An electronics retailer",
-      "rating": 4.5
-    }
-  },
-  {
-    "id": 5,
-    "name": "Product 5",
-    "price": 427,
-    "sellPrice": 536,
-    "additionPrice": 1,
-    "inventory": 86,
-    "rating": 4.2,
-    "store": {
-      "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 6,
-    "name": "Product 6",
-    "price": 52,
-    "sellPrice": 491,
-    "additionPrice": 88,
-    "inventory": 21,
-    "rating": 3.2,
-    "store": {
-      "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 7,
-    "name": "Product 7",
-    "price": 610,
-    "sellPrice": 784,
-    "additionPrice": 33,
-    "inventory": 27,
-    "rating": 2.3,
-    "store": {
+      "name": "iPhone 13 Pro",
+      "image": "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-pro-01.jpg",
+      "price": 999,
+      "sellPrice": 899,
+      "additionPrice": 100,
+      "inventory": 50,
+      "rating": 4.8,
+      "store": {
+        "id": 1,
+        "image": "https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202106030101",
+        "name": "Apple Store",
+        "description": "An online store for Apple products",
+        "rating": 4.9
+      },
+      "onSell": true,
+      "description": "<div>\n<style>\n    ul > li{\n        list-style: initial;\n    }\n    </style>\n    <p>推出年份：2021&nbsp;<br>\n    <h3><img alt=\"\" src=\"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP852/iphone13-pro-colors-480_2x.png\"\n            style=\"width: 318px; height: 203px;\" data-hires=\"true\" data-hires-status=\"replaced\"></h3>\n\n    <h3>外觀&nbsp;</h3>\n\n    <ul>\n        <li>石墨色</li>\n        <li>金色</li>\n        <li>銀色</li>\n        <li>天峰藍色</li>\n        <li>松嶺青色</li>\n    </ul>\n\n    <p><em>超瓷晶盾面板 霧面質感玻璃機背與 不鏽鋼設計</em>&nbsp;</p>\n\n    <h3>容量<sup>1</sup>&nbsp;</h3>\n\n    <ul>\n        <li>128GB</li>\n        <li>256GB</li>\n        <li>512GB</li>\n        <li>1TB</li>\n    </ul>\n\n    <h3>尺寸與重量<sup>2</sup>&nbsp;</h3>\n\n    <ul>\n        <li>寬度： 71.5 公釐(2.82 吋)</li>\n        <li>高度: 146.7 公釐(5.78 吋)</li>\n        <li>厚度: 7.65 公釐(0.30 吋)</li>\n        <li>重量：203 公克 (7.16 盎司)</li>\n    </ul>\n\n    <h3>顯示器&nbsp;</h3>\n\n    <ul>\n        <li>超 Retina XDR 顯示器具備 ProMotion 自動適應更新頻率技術</li>\n        <li>6.1 吋 (對角線) 全螢幕 OLED 顯示器</li>\n        <li>2532 x 1170 像素，460 ppi 解析度</li>\n        <li>ProMotion 技術，支援最高達 120Hz 自動適應更新頻率</li>\n        <li>HDR 顯示</li>\n        <li>原彩顯示</li>\n        <li>廣色域 (P3)</li>\n        <li>觸覺回饋觸控</li>\n        <li>2,000,000:1 對比度 (標準)</li>\n        <li>1000 尼特最大亮度 (標準)；1200 尼特最大亮度 (HDR)</li>\n        <li>防指印疏油外膜</li>\n        <li>支援同時顯示多種語言文字</li>\n    </ul>\n\n    <p><em>iPhone 13 Pro 顯示器的圓角具有優美的曲線設計，並呈現在一個標準矩形之內。以標準矩形量測時，螢幕的對角線長度為 6.06 吋 (實際可視區較小)。 </em>&nbsp;</p>\n\n    <h3>防潑、抗水與防塵<sup>3</sup>&nbsp;</h3>\n\n    <ul>\n        <li>達到 IEC 60529 標準的 IP68 等級 (在最深達 6 公尺水中最長可達 30 分鐘)</li>\n    </ul>\n\n    <h3>晶片&nbsp;</h3>\n\n    <ul>\n        <li>A15 仿生晶片</li>\n        <li>全新 6 核心 CPU 配備 2 個效能核心與 4 個節能核心</li>\n        <li>全新 5 核心 GPU</li>\n        <li>全新 16 核心神經網路引擎</li>\n    </ul>\n\n    <h3>相機&nbsp;</h3>\n\n    <ul>\n        <li>專業級 1200 萬像素相機系統：望遠、廣角與超廣角相機</li>\n        <li>望遠：ƒ/2.8 光圈</li>\n        <li>廣角：ƒ/1.5 光圈</li>\n        <li>超廣角：ƒ/1.8 光圈與 120° 視野</li>\n        <li>3 倍光學變焦放大，2 倍光學變焦縮小；6 倍光學變焦範圍</li>\n        <li>最高可達 15 倍數位變焦</li>\n        <li>夜間模式人像拍攝 (使用光學雷達掃描儀執行)</li>\n        <li>人像模式具備先進的散景效果與景深控制</li>\n        <li>人像光線具備六種效果 (自然光、攝影棚燈光、輪廓光、舞台燈光、舞台燈光黑白、高色調燈光黑白)</li>\n        <li>光學影像穩定雙相機系統 (望遠與廣角)</li>\n        <li>感光元件位移式光學影像穩定功能 (廣角)</li>\n        <li>六枚鏡片組 (望遠與超廣角)；七枚鏡片組 (廣角)</li>\n        <li>原彩閃光燈具備慢速同步</li>\n        <li>全景模式 (最高可達 6300 萬像素)</li>\n        <li>藍寶石水晶玻璃保護鏡</li>\n        <li>100% Focus Pixels (廣角)</li>\n        <li>夜間模式</li>\n        <li>深度融合</li>\n        <li>智慧型 HDR 4</li>\n        <li>攝影風格</li>\n        <li>微距攝影</li>\n        <li>Apple ProRAW</li>\n        <li>拍攝廣色域的照片與原況照片</li>\n        <li>鏡頭校正 (超廣角)</li>\n        <li>先進的紅眼校正功能</li>\n        <li>照片地理位置標記</li>\n        <li>自動影像穩定功能</li>\n        <li>連拍模式</li>\n        <li>影像拍攝格式：HEIF 與 JPEG</li>\n    </ul>\n\n    <h3>影片錄製&nbsp;</h3>\n\n    <ul>\n        <li>電影級模式可拍攝淺景深效果影片 (1080p，30 fps)</li>\n        <li>HDR 影片錄製支援杜比視界，最高可達 4K (60 fps)</li>\n        <li>4K 影片錄製，24 fps、25 fps、30 fps 或 60 fps</li>\n        <li>1080p HD 影片錄製，25 fps、30 fps 或 60 fps</li>\n        <li>720p HD 影片錄製，30 fps</li>\n        <li>ProRes 影片錄製，最高可達 4K，30 fps (儲存容量 128GB 的機型為 1080p，30 fps)</li>\n        <li>微距影片錄製，包括慢動作與縮時攝影</li>\n        <li>適用於錄影的光學影像穩定雙相機系統 (望遠與廣角)</li>\n        <li>適用於錄影的感光元件位移式光學影像穩定功能 (廣角)</li>\n        <li>3 倍光學變焦放大，2 倍光學變焦縮小；6 倍光學變焦範圍</li>\n        <li>最高可達 9 倍數位變焦</li>\n        <li>音訊變焦</li>\n        <li>原彩閃光燈</li>\n        <li>影片快錄功能</li>\n        <li>支援 1080p (120 fps 或 240 fps) 的慢動作影片</li>\n        <li>具備視訊穩定功能的縮時攝影</li>\n        <li>夜間模式縮時攝影</li>\n        <li>電影級視訊穩定功能 (4K、1080p 與 720p)</li>\n        <li>連續自動對焦錄影</li>\n        <li>錄製 4K 影片時可拍攝 800 萬像素靜照</li>\n        <li>縮放播放</li>\n        <li>影片錄製格式：HEVC、H.264 與 ProRes</li>\n        <li>立體聲錄音</li>\n    </ul>\n\n    <h3>原深感測相機&nbsp;</h3>\n\n    <ul>\n        <li>1200 萬像素相機</li>\n        <li>ƒ/2.2 光圈</li>\n        <li>人像模式具備先進的散景效果與景深控制</li>\n        <li>人像光線具備六種效果 (自然光、攝影棚燈光、輪廓光、舞台燈光、舞台燈光黑白、高色調燈光黑白)</li>\n        <li>Animoji 與 Memoji</li>\n        <li>夜間模式</li>\n        <li>深度融合</li>\n        <li>智慧型 HDR 4</li>\n        <li>攝影風格</li>\n        <li>Apple ProRAW</li>\n        <li>電影級模式可拍攝淺景深效果影片 (1080p，30 fps)</li>\n        <li>HDR 影片錄製支援杜比視界，最高可達 4K (60 fps)</li>\n        <li>4K 影片錄製，24 fps、25 fps、30 fps 或 60 fps</li>\n        <li>1080p HD 影片錄製，25 fps、30 fps 或 60 fps</li>\n        <li>ProRes 影片錄製，最高可達 4K，30 fps (儲存容量 128GB 的機型為 1080p，30 fps)</li>\n        <li>支援 1080p (120 fps) 的慢動作影片</li>\n        <li>具備視訊穩定功能的縮時攝影</li>\n        <li>夜間模式縮時攝影</li>\n        <li>電影級視訊穩定功能 (4K、1080p 與 720p)</li>\n        <li>影片快錄功能</li>\n        <li>拍攝廣色域的照片與原況照片</li>\n        <li>鏡頭校正</li>\n        <li>Retina 閃光燈</li>\n        <li>自動影像穩定功能</li>\n        <li>連拍模式</li>\n    </ul>\n\n    <h3>FaceID&nbsp;</h3>\n\n    <ul>\n        <li>透過原深感測相機進行臉部辨識</li>\n    </ul>\n\n    <h3>ApplePay&nbsp;</h3>\n\n    <ul>\n        <li>在店內、app 內及網頁上，使用 Face ID 以 iPhone 付款</li>\n        <li>輔助你在 Mac 上以 Apple Pay 完成購買</li>\n    </ul>\n\n    <p><a href=\"https://www.apple.com/tw/apple-pay/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/apple-pay/_2&quot;;return this.s_oc?this.s_oc(e):true\">進一步了解\n            Apple Pay</a>&nbsp;</p>\n\n    <h3>行動網路與無線技術&nbsp;</h3>\n\n    <ul>\n        <li>機型 A2638<sup><sup>*</sup></sup>&nbsp;\n\n            <ul>\n                <li>5G NR (頻段 n1、n2、n3、n5、n7、n8、n12、n20、n25、n28、n30、n38、n40、n41、n48、n66、n77、n78、n79)</li>\n                <li>FDD-LTE (頻段 1、2、3、4、5、7、8、12、13、17、18、19、20、25、26、28、30、32、66)</li>\n                <li>TD-LTE (頻段 34、38、39、40、41、42、46、48)</li>\n                <li>UMTS/HSPA+/DC-HSDPA (850、900、1700/2100、1900、2100 MHz)</li>\n                <li>GSM/EDGE (850、900、1800、1900 MHz)</li>\n            </ul>\n        </li>\n        <li>機型 A2643<sup><sup>*</sup></sup>&nbsp;\n            <ul>\n                <li>5G NR (頻段 n1、n2、n3、n5、n7、n8、n12、n20、n25、n28、n30、n38、n40、n41、n48、n66、n77、n78、n79)</li>\n                <li>FDD-LTE (頻段 1、2、3、4、5、7、8、12、13、17、18、19、20、25、26、28、30、32、66)</li>\n                <li>TD-LTE (頻段 34、38、39、40、41、42、46、48)</li>\n                <li>UMTS/HSPA+/DC-HSDPA (850、900、1700/2100、1900、2100 MHz)</li>\n                <li>GSM/EDGE (850、900、1800、1900 MHz)</li>\n            </ul>\n        </li>\n        <li>所有機型&nbsp;\n            <ul>\n                <li>5G (sub-6 GHz)，具 4x4 MIMO 技術<sup>4</sup></li>\n                <li>Gigabit LTE，具 4x4 MIMO 與 LAA 技術<sup>4</sup></li>\n                <li>Wi-Fi 6 (802.11ax)，具 2x2 MIMO 技術</li>\n                <li>藍牙 5.0 無線技術</li>\n                <li>超寬頻晶片用於空間感知<sup>5</sup></li>\n                <li>NFC 具備讀取模式</li>\n                <li>可使用備用電量的快速卡</li>\n            </ul>\n        </li>\n    </ul>\n\n    <p>如需 5G 與 LTE 支援的詳細資訊，請洽詢你的電信業者並參閱 <a href=\"https://www.apple.com/tw/iphone/cellular/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/iphone/cellular/_1&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/iphone/cellular</a>&nbsp;\n    </p>\n\n    <h3>定位功能&nbsp;</h3>\n\n    <ul>\n        <li>內建全球定位系統 (GPS)、格洛納斯系統 (GLONASS)、伽利略定位系統 (Galileo)、準天頂衛星系統 (QZSS) 與北斗衛星導航系統</li>\n        <li>數位指南針</li>\n        <li>Wi-Fi</li>\n        <li>行動網路</li>\n        <li>iBeacon 微型定位服務</li>\n    </ul>\n\n    <h3>視訊通話<sup>6</sup>&nbsp;</h3>\n\n    <ul>\n        <li>透過行動網路或 Wi-Fi 進行 FaceTime 視訊通話</li>\n        <li>透過 5G 或 Wi-Fi 進行 FaceTime HD (1080p) 視訊通話</li>\n        <li>透過同播共享功能在 FaceTime 通話中共享電影、電視、音樂及其他 app 等體驗</li>\n        <li>螢幕共享</li>\n        <li>FaceTime 視訊支援人像模式</li>\n        <li>空間音訊</li>\n        <li>語音隔離和寬廣頻譜麥克風模式</li>\n        <li>後置相機支援光學變焦</li>\n    </ul>\n\n    <h3>音訊播放<sup>6</sup>&nbsp;</h3>\n\n    <ul>\n        <li>FaceTime 語音</li>\n        <li>Voice over LTE (VoLTE)<sup>4</sup></li>\n        <li>Wi-Fi 通話<sup>4</sup></li>\n        <li>透過同播共享功能在 FaceTime 通話中共享電影、電視、音樂及其他 app 等體驗</li>\n        <li>螢幕共享</li>\n        <li>空間音訊</li>\n        <li>語音隔離和寬廣頻譜麥克風模式</li>\n    </ul>\n\n    <h3>音訊播放&nbsp;</h3>\n\n    <ul>\n        <li>支援的格式包括 AAC、MP3、Apple 保真壓縮、FLAC、杜比數位、杜比數位+ 與杜比全景聲</li>\n        <li>空間音訊播放</li>\n        <li>使用者可自行設定最大音量限制</li>\n    </ul>\n\n    <h3>影片播放&nbsp;</h3>\n\n    <ul>\n        <li>支援的格式包括 HEVC、H.264 與 ProRes</li>\n        <li>HDR 支援杜比視界、HDR10 與 HLG</li>\n        <li>AirPlay 鏡像輸出、照片與視訊輸出至 Apple TV (第 2 代或後續機型) 或支援 AirPlay 2 的智慧型電視，最高可達 4K HDR</li>\n        <li>支援視訊鏡像輸出與視訊輸出：使用 Lightning 數位 AV 轉接器與 Lightning 對 VGA 轉接器，最高可達 1080p (轉接器另售)<sup>7</sup></li>\n    </ul>\n\n    <h3>Siri<sup>8</sup>&nbsp;</h3>\n\n    <ul>\n        <li>用你的聲音來傳送訊息、設定提醒事項，以及更多</li>\n        <li>用你的聲音說出「嘿 Siri」才能免持啟用</li>\n        <li>用你的聲音在喜愛的 app 內執行捷徑</li>\n    </ul>\n\n    <p><a href=\"https://www.apple.com/tw/siri/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/siri/_3&quot;;return this.s_oc?this.s_oc(e):true\">進一步了解\n            Siri</a>&nbsp;</p>\n\n    <h3>外部按鈕與連接器&nbsp;</h3>\n\n    <ol>\n        <li>前置相機</li>\n        <li>側邊按鈕</li>\n        <li>Lightning 連接器</li>\n        <li>SIM 卡托盤</li>\n        <li>音量按鈕</li>\n        <li>響鈴/靜音開關</li>\n        <li>後置相機</li>\n        <li>閃光燈</li>\n        <li>光學雷達掃描儀</li>\n    </ol>\n\n    <p><img alt=\"\" src=\"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP852/sp852-connector-13pro-13promax_2x.png\"\n            style=\"height: 415px; width: 450px;\" data-hires=\"true\" data-hires-status=\"replaced\"></p>\n\n    <h3>電源與電池<sup>9</sup>&nbsp;</h3>\n\n    <ul>\n        <li>影片播放時間： 最長可達 22 小時</li>\n        <li>影片串流播放時間： 最長可達 20 小時</li>\n        <li>音訊播放時間：最長可達 75 小時</li>\n        <li>內建充電式鋰離子電池</li>\n        <li>MagSafe 無線充電最高可達 15W<sup>10</sup></li>\n        <li>Qi 無線充電最高可達 7.5W<sup>10</sup></li>\n        <li>透過電腦 USB 或電源轉接器充電</li>\n        <li>快速充電功能：</li>\n        <li>充電約 30 分鐘最高可達 50% 電量<sup>11</sup>，須使用 20W 或更高功率轉接器 (另售)</li>\n    </ul>\n\n    <h3>MagSafe&nbsp;</h3>\n\n    <ul>\n        <li>無線充電最高可達 15W<sup>10</sup></li>\n        <li>磁石陣列</li>\n        <li>磁石對位</li>\n        <li>配件識別 NFC</li>\n        <li>磁力儀</li>\n    </ul>\n\n    <h3>感測器&nbsp;</h3>\n\n    <ul>\n        <li>Face ID</li>\n        <li>光學雷達掃描儀</li>\n        <li>氣壓感測器</li>\n        <li>三軸陀螺儀</li>\n        <li>加速度計</li>\n        <li>接近感測器</li>\n        <li>環境光度感測器</li>\n    </ul>\n\n    <h3>作業系統&nbsp;</h3>\n\n    <p><b>iOS15</b><br>\n        iOS 是全世界最個人化和最安全的行動作業系統，滿載強大的功能，並且專為保護你的隱私而設計。<br>\n        <a href=\"https://www.apple.com/tw/ios/ios-15/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/ios/ios-15/_1&quot;;return this.s_oc?this.s_oc(e):true\">看看\n            iOS 的全新功能</a><br>\n        <a href=\"https://support.apple.com/zh-tw/guide/iphone/welcome/ios\"\n            onclick=\"s_objectID=&quot;https://support.apple.com/zh-tw/guide/iphone/welcome/ios_1&quot;;return this.s_oc?this.s_oc(e):true\">iPhone\n            使用手冊</a>\n    </p>\n\n    <h3>輔助使用&nbsp;</h3>\n\n    <p>眾多支援視覺、活動能力、聽覺及認知障礙人士的內建輔助使用功能，協助你盡情發揮 iPhone 的精彩。<br>\n        <a href=\"https://www.apple.com/tw/accessibility/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/accessibility/_1&quot;;return this.s_oc?this.s_oc(e):true\">進一步瞭解\n            輔助使用</a>&nbsp;\n    </p>\n\n    <p>各項功能包括：&nbsp;</p>\n\n    <ul>\n        <li>旁白</li>\n        <li>縮放</li>\n        <li>放大鏡</li>\n        <li>Siri 和聽寫</li>\n        <li>輸入來和 Siri 對話</li>\n        <li>切換控制</li>\n        <li>隱藏式字幕</li>\n        <li>輔助觸控</li>\n        <li>語音內容</li>\n        <li>背面輕點</li>\n    </ul>\n\n    <h3>內建 App&nbsp;</h3>\n\n    <ul>\n        <li>相機</li>\n        <li>照片</li>\n        <li>健康</li>\n        <li>訊息</li>\n        <li>電話</li>\n        <li>FaceTime</li>\n        <li>郵件</li>\n        <li>音樂</li>\n        <li>錢包</li>\n        <li>Safari</li>\n        <li>地圖</li>\n        <li>Siri</li>\n        <li>行事曆</li>\n        <li>iTunes Store</li>\n        <li>App Store</li>\n        <li>備忘錄</li>\n        <li>聯絡人</li>\n        <li>書籍</li>\n        <li>家庭</li>\n        <li>天氣</li>\n        <li>提醒事項</li>\n        <li>時鐘</li>\n        <li>TV</li>\n        <li>股市</li>\n        <li>計算機</li>\n        <li>語音備忘錄</li>\n        <li>指南針</li>\n        <li>Podcast</li>\n        <li>Watch</li>\n        <li>提示</li>\n        <li>尋找</li>\n        <li>設定</li>\n        <li>檔案</li>\n        <li>測距儀</li>\n        <li>放大鏡</li>\n        <li>捷徑</li>\n        <li>翻譯</li>\n    </ul>\n\n    <h3>Apple 的免額外付費 App&nbsp;</h3>\n\n    <p><em>已預先安裝 Pages、Numbers、Keynote、iMovie、GarageBand、可立拍」與 Apple Store app。</em></p>\n\n    <ul>\n        <li>iMovie</li>\n        <li>Pages</li>\n        <li>Keynote</li>\n        <li>Numbers</li>\n        <li>GarageBand</li>\n        <li>Apple Store</li>\n        <li>iTunes 遙控器</li>\n        <li>可立拍</li>\n        <li>支援</li>\n    </ul>\n\n    <h3>SIM 卡&nbsp;</h3>\n\n    <ul>\n        <li>雙 SIM 卡 (nano‑SIM 與 eSIM)<sup>12</sup></li>\n        <li>支援雙 eSIM<sup>12</sup></li>\n        <li>iPhone 13 Pro 和 iPhone 13 Pro Max 與現有 micro-SIM 卡不相容。</li>\n    </ul>\n\n    <h3>助聽輔具等級&nbsp;</h3>\n\n    <ul>\n        <li>M3、T4</li>\n    </ul>\n\n    <h3>電子郵件附件支援格式&nbsp;</h3>\n\n    <ul>\n        <li>可顯示的文件類型<br>\n            .jpg、.tiff、.gif (圖片)；.doc 及 .docx (Microsoft Word)；.htm 及 .html (網頁)；.key (Keynote)；.numbers\n            (Numbers)；.pages (Pages)；.pdf (預覽程式與 Adobe Acrobat)；.ppt 及 .pptx (Microsoft PowerPoint)；.txt (文字)；.rtf (RTF\n            格式)；.vcf (聯絡資訊)；.xls 及 .xlsx (Microsoft Excel)；.zip；.ics；.usdz (USDZ Universal)</li>\n    </ul>\n\n    <h3>系統需求&nbsp;</h3>\n\n    <ul>\n        <li>Apple ID (部分功能需要)</li>\n        <li>網際網路連線<sup>13</sup></li>\n        <li>在 Mac 或 PC 上進行同步需要：&nbsp;\n            <ul>\n                <li>在 macOS Catalina 10.15 或以上版本中使用 Finder</li>\n                <li>在 macOS El Capitan 10.11.6 至 macOS Mojave 10.14.6 中使用 iTunes 12.8 或以上版本</li>\n                <li>Windows 7 或以上版本使用 iTunes 12.10.10 或以上版本 (可自 <a href=\"https://www.apple.com/tw/itunes/download\"\n                        onclick=\"s_objectID=&quot;https://www.apple.com/tw/itunes/download_1&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/itunes/download</a>\n                    免費下載)</li>\n            </ul>\n        </li>\n    </ul>\n\n    <h3>環境需求&nbsp;</h3>\n\n    <ul>\n        <li>作業環境溫度： 0° 至 35° C (32° 至 95° F)</li>\n        <li>非作業溫度： −20° 至 45° C (−4° 至 113° F)</li>\n        <li>相對濕度： 5% 至 95% 非冷凝狀態</li>\n        <li>作業高度： 目前測試最高可達 3,000 公尺 (10,000 呎)</li>\n    </ul>\n\n    <h3>語言版本&nbsp;</h3>\n\n    <ul>\n        <li><b>語言支援</b><br>\n            英文 (澳洲、加拿大、印度、新加坡、英國、美國)、中文 (簡體、繁體、香港繁體)、法文 (加拿大、法國)、德文、義大利文、日文、韓文、西班牙文\n            (拉丁美洲、墨西哥、西班牙)、阿拉伯文、加泰蘭文、克羅埃西亞文、捷克文、丹麥文、荷蘭文、芬蘭文、希臘文、希伯來文、印地文、匈牙利文、印尼文、馬來文、挪威文、波蘭文、葡萄牙文\n            (巴西、葡萄牙)、羅馬尼亞文、俄文、斯洛伐克文、瑞典文、泰文、土耳其文、烏克蘭文、越南文</li>\n        <li><b>快速輸入鍵盤支援</b><br>\n            英文 (澳洲、加拿大、印度、新加坡、英國、美國)、簡體中文 (手寫、拼音 - 英文鍵盤、拼音 - 九宮格、雙拼、筆畫)、繁體中文 (倉頡、手寫、拼音 - 英文鍵盤、拼音 - 九宮格、雙拼、筆畫、速成、注音)、法文\n            (比利時、加拿大、法國、瑞士)、德文 (奧地利、德國、瑞士)、義大利文、日文 (假名、羅馬字)、韓文 (2-Set、九宮格)、西班牙文 (拉丁美洲、墨西哥、西班牙)、阿伊努文、阿爾巴尼亞文、阿姆哈拉文、阿拉伯文\n            (現代標準、納吉迪)、亞美尼亞文、阿薩姆文、亞述文、亞塞拜然文、孟加拉文、白俄羅斯文、博多文、保加利亞文、緬甸文、繁體粵語\n            (倉頡、手寫、筆畫、速成)、加泰蘭文、柴羅基文、克羅埃西亞文、捷克文、丹麥文、迪維西文、多格來文、荷蘭文、表情符號、愛沙尼亞文、法羅文、菲律賓文、芬蘭文、法蘭德斯文、富拉文\n            (阿德拉姆文字)、喬治亞文、希臘文、古吉拉特文、夏威夷文、希伯來文、印地文 (天城文字、拉丁文字、轉寫)、匈牙利文、冰島文、伊布文、印尼文、愛爾蘭蓋爾文、坎那達文、克什米爾文\n            (阿拉伯文字、天城文字)、哈薩克文、高棉文、貢根文 (天城文字)、庫德文 (阿拉伯文字、拉丁文字)、吉爾吉斯文、寮文、拉脫維亞文、立陶宛文、馬其頓文、邁蒂利文、馬來文\n            (阿拉伯文字、拉丁文字)、馬來亞拉姆文、馬爾他文、曼尼普爾文 (孟加拉文字、曼尼普爾文字)、毛利文、馬拉地文、蒙古文、納瓦荷文、尼泊爾文、挪威文 (巴克摩、耐諾斯克)、歐迪亞文、普什圖文、波斯文、波斯文\n            (阿富汗)、波蘭文、葡萄牙文 (巴西、葡萄牙)、旁遮普文、羅興亞文、羅馬尼亞文、俄文、梵文、桑塔利文 (天城文字、Ol Chiki)、塞爾維亞文 (斯拉夫文字、拉丁文字)、信德文\n            (阿拉伯文字、天城文字)、僧伽羅文、斯洛伐克文、斯洛維尼亞文、史瓦希里文、瑞典文、塔吉克文、坦米爾文 (Anjal、坦米爾文字\n            99)、泰盧固文、泰文、藏文、東加文、土耳其文、土庫曼文、烏克蘭文、烏都文、維吾爾文、烏茲別克文 (阿拉伯文字、斯拉夫文字、拉丁文字)、越南文、威爾斯文</li>\n        <li><b>支援自動修正的快速輸入鍵盤</b><br>\n            阿拉伯文 (現代標準)、阿拉伯文 (納吉迪)、孟加拉文、保加利亞文、加泰蘭文、柴羅基文、簡體中文 (拼音 - 英文鍵盤)、繁體中文 (拼音 - 英文鍵盤)、繁體中文\n            (注音)、克羅埃西亞文、捷克文、丹麥文、荷蘭文、英文 (澳洲)、英文 (加拿大)、英文 (印度)、英文 (日本)、英文 (新加坡)、英文 (英國)、英文 (美國)、愛沙尼亞文、菲律賓文、芬蘭文、荷蘭文\n            (比利時)、法文 (比利時)、法文 (加拿大)、法文 (法國)、法文 (瑞士)、德文 (奧地利)、德文 (德國)、德文 (瑞士)、希臘文、古吉拉特文、夏威夷文、希伯來文、印地文 (天城文字)、印地文\n            (轉寫)、匈牙利文、冰島文、印尼文、愛爾蘭蓋爾文、義大利文、日文 (假名)、日文 (羅馬字)、韓文 (2-set)、拉脫維亞文、立陶宛文、馬其頓文、馬來文、馬拉地文、挪威文 (巴克摩)、挪威文\n            (耐諾斯克)、波斯文、波斯文 (阿富汗)、波蘭文、葡萄牙文 (巴西)、葡萄牙文 (葡萄牙)、旁遮普文、羅馬尼亞文、俄文、塞爾維亞文 (斯拉夫文字)、塞爾維亞文 (拉丁文字)、斯洛伐克文、斯洛維尼亞文、西班牙文\n            (拉丁美洲)、西班牙文 (墨西哥)、西班牙文 (西班牙)、瑞典文、坦米爾文 (Anjal)、坦米爾文 (坦米爾文字 99)、泰盧固文、泰文、土耳其文、烏克蘭文、烏都文、越南文</li>\n        <li><b>支援預測輸入的快速輸入鍵盤</b><br>\n            英文 (澳洲、加拿大、印度、新加坡、英國、美國)、中文 (簡體、繁體)、法文 (比利時、加拿大、法國、瑞士)、德文 (奧地利、德國、瑞士)、義大利文、日文、韓文、西班牙文 (拉丁美洲、墨西哥、西班牙)、阿拉伯文\n            (現代標準、納吉迪)、粵語 (繁體)、荷蘭文、印地文 (天城文字、拉丁文字)、葡萄牙文 (巴西、葡萄牙)、俄文、瑞典文、泰文、土耳其文、越南文</li>\n        <li><b>支援多語言輸入的快速輸入鍵盤</b><br>\n            英文 (美國)、英文 (澳洲)、英文 (加拿大)、英文 (印度)、英文 (新加坡)、英文 (英國)、簡體中文 (拼音)、繁體中文 (拼音)、法文 (法國)、法文 (比利時)、法文 (加拿大)、法文 (瑞士)、德文\n            (德國)、德文 (奧地利)、德文 (瑞士)、義大利文、日文 (羅馬字)、葡萄牙文 (巴西)、葡萄牙文 (葡萄牙)、西班牙文 (西班牙)、西班牙文 (拉丁美洲)、西班牙文 (墨西哥)、荷蘭文 (比利時)、荷蘭文\n            (荷蘭)、印地文 (拉丁文字)</li>\n        <li><b>支援上下文建議的快速輸入鍵盤</b><br>\n            英文 (美國)、英文 (澳洲)、英文 (加拿大)、英文 (印度)、英文 (新加坡)、英文 (英國)、簡體中文、法文 (比利時)、法文 (加拿大)、法文 (法國)、法文 (瑞士)、德文 (奧地利)、德文 (德國)、德文\n            (瑞士)、義大利文、西班牙文 (拉丁美洲)、西班牙文 (墨西哥)、西班牙文 (西班牙)、阿拉伯文 (現代標準)、阿拉伯文 (納吉迪)、荷蘭文 (比利時)、荷蘭文 (荷蘭)、印地文 (天城文字)、印地文\n            (拉丁文字)、俄文、瑞典文、葡萄牙文 (巴西)、土耳其文、越南文</li>\n        <li><b>快滑鍵盤支援</b><br>\n            英文 (美國)、英文 (澳洲)、英文 (加拿大)、英文 (印度)、英文 (新加坡)、英文 (英國)、中文 (簡體)、法文 (加拿大)、法文 (法國)、法文 (瑞士)、德文 (奧地利)、德文 (德國)、德文\n            (瑞士)、義大利文、西班牙文 (拉丁美洲)、西班牙文 (墨西哥)、西班牙文 (西班牙)、葡萄牙文 (巴西)、葡萄牙文 (葡萄牙)、荷蘭文 (比利時)、荷蘭文 (荷蘭)、瑞典文、越南文</li>\n        <li><b>Siri 語言</b><br>\n            英文 (澳洲、加拿大、印度、愛爾蘭、紐西蘭、新加坡、南非、英國、美國)、西班牙文 (智利、墨西哥、西班牙、美國)、法文 (比利時、加拿大、法國、瑞士)、德文 (奧地利、德國、瑞士)、義大利文 (義大利、瑞士)、日文\n            (日本)、韓文 (韓國)、國語 (中國大陸)、國語 (台灣)、粵語 (中國大陸、香港)、阿拉伯文 (沙烏地阿拉伯、阿拉伯聯合大公國)、丹麥文 (丹麥)、荷蘭文 (比利時、荷蘭)、芬蘭文 (芬蘭)、希伯來文\n            (以色列)、馬來文 (馬來西亞)、挪威文 (挪威)、葡萄牙文 (巴西)、俄文 (俄國)、瑞典文 (瑞典)、泰文 (泰國)、土耳其文 (土耳其)</li>\n        <li><b>聽寫語言</b><br>\n            英文 (澳洲、加拿大、印度、印尼、愛爾蘭、馬來西亞、紐西蘭、菲律賓、沙烏地阿拉伯、新加坡、南非、阿拉伯聯合大公國、英國、美國)、西班牙文\n            (阿根廷、智利、哥倫比亞、哥斯大黎加、多明尼加共和國、厄瓜多、薩爾瓦多、瓜地馬拉、宏都拉斯、墨西哥、巴拿馬、巴拉圭、秘魯、西班牙、烏拉圭、美國)、法文 (比利時、加拿大、法國、盧森堡、瑞士)、德文\n            (奧地利、德國、盧森堡、瑞士)、義大利文 (義大利、瑞士)、日文、韓文、國語 (中國大陸)、國語 (台灣)、粵語 (中國大陸、香港、澳門)、阿拉伯文\n            (科威特、卡達、沙烏地阿拉伯、阿拉伯聯合大公國)、加泰蘭文、克羅埃西亞文、捷克文、丹麥文、荷蘭文 (比利時、荷蘭)、芬蘭文、希臘文、希伯來文、印地文 (印度)、匈牙利文、印尼文、馬來文、挪威文、波蘭文、葡萄牙文\n            (巴西、葡萄牙)、羅馬尼亞文、俄文、上海話 (中國大陸)、斯洛伐克文、瑞典文、泰文、土耳其文、烏克蘭文、越南文</li>\n        <li><b>定義字典支援</b><br>\n            英文 (英國、美國)、中文 (簡體、繁體)、丹麥文、荷蘭文、法文、德文、希伯來文、印地文、義大利文、日文、韓文、挪威文、葡萄牙文、俄文、西班牙文、瑞典文、泰文、土耳其文</li>\n        <li><b>雙語字典支援</b><br>\n            阿拉伯文 – 英文、中文 (簡體) – 英文、中文 (繁體) – 英文、荷蘭文 – 英文、法文 – 英文、法文 – 德文、德文 – 英文、古吉拉特文 – 英文、印地文 – 英文、印尼文 – 英文、義大利文 –\n            英文、日文 – 英文、日文 – 中文 (簡體)、韓文 – 英文、波蘭文 – 英文、葡萄牙文 – 英文、俄文 – 英文、西班牙文 – 英文、坦米爾文 – 英文、泰盧固文 – 英文、泰文 – 英文、烏都文 –\n            英文、越南文 – 英文</li>\n        <li><b>同義詞詞典</b><br>\n            英文 (英國、美國)、中文 (簡體)</li>\n        <li><b>拼字檢查</b><br>\n            英文、法文、德文、義大利文、西班牙文、阿拉伯文、阿拉伯文 (納吉迪)、丹麥文、荷蘭文、芬蘭文、韓文、挪威文、波蘭文、葡萄牙文、俄文、瑞典文、土耳其文</li>\n        <li><b>Apple Pay 支援地區</b><br>\n            亞美尼亞、澳洲、奧地利、亞塞拜然、巴林、白俄羅斯、比利時、巴西、保加利亞、加拿大、中國大陸<sup>14</sup>、哥倫比亞、哥斯大黎加、克羅埃西亞、塞普勒斯、捷克共和國、丹麥、愛沙尼亞、法羅群島、芬蘭、法國、喬治亞、德國、希臘、格陵蘭、根息、香港、匈牙利、冰島、愛爾蘭、曼島、以色列、義大利、日本、澤西島、哈薩克、拉脫維亞、列支敦斯登、立陶宛、盧森堡、澳門、馬爾他、墨西哥、摩納哥、蒙特內哥羅、荷蘭、紐西蘭、挪威、巴勒斯坦、波蘭、葡萄牙、卡達、羅馬尼亞、聖馬利諾、沙烏地阿拉伯、塞爾維亞、新加坡、斯洛伐克、斯洛維尼亞、南非、西班牙、瑞典、瑞士、台灣、英國、烏克蘭、阿拉伯聯合大公國、美國、梵蒂岡\n        </li>\n    </ul>\n\n    <h3>包裝盒內容&nbsp;</h3>\n\n    <ul>\n        <li>iPhone 13 Pro</li>\n        <li>USB-C 對 Lightning 連接線</li>\n        <li>說明文件</li>\n    </ul>\n\n    <p><em>為實現<a href=\"https://www.apple.com/tw/environment\"\n                onclick=\"s_objectID=&quot;https://www.apple.com/tw/environment_1&quot;;return this.s_oc?this.s_oc(e):true\">我們的環保目標</a>，iPhone\n            13 Pro 不隨附電源轉接器和 EarPods。包裝盒內隨附的是一條支援快速充電的 USB‑C 對 Lightning 連接線，並可與 USB‑C 電源轉接器及電腦連接埠相容。</em></p>\n\n    <p><em>我們鼓勵重複使用你現有的 USB‑A 對 Lightning 連接線、電源轉接器及耳機，這些配件都能與這些 iPhone 機型相容。但如果你需要任何新的 Apple 電源轉接器或耳機，也可以隨時購買。</em></p>\n\n    <h3>iPhone 與環境&nbsp;</h3>\n\n    <p>iPhone 13 Pro 與 iPhone 13 Pro Max 具有以下設計特色，能減少對環境的影響<sup>15</sup>:<br>\n        <a href=\"https://www.apple.com/tw/environment/#reports-product\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/environment/#reports-product_1&quot;;return this.s_oc?this.s_oc(e):true\">查看《iPhone\n            13 Pro 與 iPhone 13 Pro Max 產品環保報告》</a>\n    </p>\n\n    <p><b>以更佳的材料製造</b>&nbsp;</p>\n\n    <ul>\n        <li>觸感引擎採用 100％ 再生鎢金屬，佔裝置中整體鎢金屬含量的 99％</li>\n        <li>所有磁石皆採用 100％ 再生稀土元素，佔裝置中整體稀土元素含量的 98％</li>\n        <li>主機板鍍金採用 100％ 再生金</li>\n        <li>前置相機與後置相機的排線採用 100% 再生金</li>\n        <li>主機板焊料與電池組管理單元採用 100% 再生錫金屬</li>\n        <li>多項零組件採用 35％ 或更高比例的再生塑膠</li>\n    </ul>\n\n    <p><b>能源效率</b></p>\n\n    <ul>\n        <li>符合美國能源部對電池充電器系統的要求<sup>16</sup></li>\n    </ul>\n\n    <p><b>更睿智的化學理念<sup>17</sup></b></p>\n\n    <ul>\n        <li>無砷的顯示器玻璃</li>\n        <li>無汞、溴化阻燃劑 (BFR)、聚氯乙烯 (PVC) 與鈹</li>\n    </ul>\n\n    <p><b>綠色製造</b>&nbsp;</p>\n\n    <ul>\n        <li>Apple 的零廢棄物方案協助供應商消除送往掩埋場的廢棄物</li>\n        <li>所有最終組裝供應商廠區皆逐步轉用 100％ 再生能源製造 Apple 產品</li>\n    </ul>\n\n    <p><b>負責任的包裝</b>&nbsp;</p>\n\n    <ul>\n        <li>原木纖維 100% 來自負責任管理的林地</li>\n        <li>採用 90% 或更高比例的纖維包裝材料</li>\n    </ul>\n    <hr>\n    <p><small><sup>*</sup></small> 如需 5G 與 LTE 支援的詳細資訊，請洽詢你的電信業者並參閱 <a href=\"https://www.apple.com/tw/iphone/cellular/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/iphone/cellular/_2&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/iphone/cellular</a>。行動網路技術支援視\n        iPhone 型號以及 CDMA 或 GSM 網路的配置而定。&nbsp;</p>\n\n    <ol>\n        <li>可用儲存空間會隨著眾多因素而減少並有所差異。標準配置會使用約 12GB 至 17GB 的空間，包括 iOS 15 與其最新功能，以及可刪除的各款 Apple app。可刪除的各款 Apple app 約會佔用\n            4.5GB 的空間，你可隨時從 App Store 再次下載這些 app。儲存容量會隨軟體版本、設定與 iPhone 機型而有所變動。</li>\n        <li>尺寸和重量隨配置和製程不同而有所差異。</li>\n        <li>iPhone 13 Pro 與 iPhone 13 Pro Max 皆具備防潑抗水與防塵功能，並且已在受控管的實驗室環境條件下測試，達到 IEC 60529 標準的 IP68 等級 (在最深達 6 公尺水中最長可達\n            30 分鐘)。防潑抗水與防塵功能非永久狀態，並可能隨日常使用造成的耗損而下降。請勿為潮濕的 iPhone 充電；請參閱使用手冊了解清潔與乾燥處理說明。液體造成的損壞並不在保固範圍內。</li>\n        <li>須使用數據方案。5G、Gigabit LTE、VoLTE 和 Wi-Fi 通話服務僅於特定地區並透過特定電信業者提供。連線速度是依據理論傳輸值，並會因所在地情況及電信業者而異。如需 5G 與 LTE\n            支援的詳細資訊，請洽詢你的電信業者並參閱 <a href=\"https://www.apple.com/tw/iphone/cellular/\"\n                onclick=\"s_objectID=&quot;https://www.apple.com/tw/iphone/cellular/_3&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/iphone/cellular</a>。\n        </li>\n        <li>超寬頻的供應狀況視地區而異。</li>\n        <li>FaceTime 通話需要收、發話雙方均使用具有 FaceTime 功能的裝置與 Wi-Fi 連線。行動網路的適用情形視電信業者方案而定；數據服務可能須要付費。</li>\n        <li>僅限標準動態範圍影片內容。</li>\n        <li>Siri 可能無法適用於所有語言或地區，功能可能因地區而異。須使用網際網路連線。行動數據服務可能須要付費。</li>\n        <li>所列舉的電池效能因受網路配置與許多其他因素影響，實際結果可能有所差異。電池的充電循環次數有限，最終仍可能須要更換。電池使用時間視使用情況及設定狀態而異。請參閱 <a\n                href=\"https://www.apple.com/tw/batteries/\"\n                onclick=\"s_objectID=&quot;https://www.apple.com/tw/batteries/_1&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/batteries</a>\n            與 <a href=\"https://www.apple.com/tw/iphone/battery.html\"\n                onclick=\"s_objectID=&quot;https://www.apple.com/tw/iphone/battery.html_1&quot;;return this.s_oc?this.s_oc(e):true\">apple.com/tw/iphone/battery.html</a>，以取得進一步資訊。\n        </li>\n        <li>無線充電器另售。</li>\n        <li>測試由 Apple 於 2021 年 8 月採用 iPhone 13 mini、iPhone 13、iPhone 13 Pro 與 iPhone 13 Pro Max 預量產機型和軟體，以及 Apple USB-C\n            電源轉接器配件 (20W 型號 A2305) 進行。快速充電測試是在電力耗盡的 iPhone 機型進行。充電時間視設定與環境因素而異；實際結果可能有所差異。</li>\n        <li>使用 eSIM 需要無線網路服務方案 (可能會在更換服務供應商與漫遊服務方面有所限制，合約到期後亦同)。並非所有電信業者均支援 eSIM。向部分電信業者購買的 iPhone，其 eSIM\n            可能暫時無法使用。詳情請洽詢你的電信業者。進一步了解，請參閱 <a href=\"https://support.apple.com/zh-tw/HT212780\"\n                onclick=\"s_objectID=&quot;https://support.apple.com/zh-tw/HT212780_1&quot;;return this.s_oc?this.s_oc(e):true\">support.apple.com/zh-tw/HT212780</a>。\n        </li>\n        <li>建議使用無線寬頻網路；可能須要付費。</li>\n        <li>在中國大陸，僅限搭載 iOS 11.2 或以上版本的相容 iPhone 與 iPad 機型，可在 Safari 中的網頁使用 Apple Pay。</li>\n        <li>截至產品發布時數據準確。</li>\n        <li>能源效率表現是根據美國能源部有關<a href=\"https://www.regulations.gov/document/EERE-2008-BT-STD-0005-0256\"\n                onclick=\"s_objectID=&quot;https://www.regulations.gov/document/EERE-2008-BT-STD-0005-0256_1&quot;;return this.s_oc?this.s_oc(e):true\">電池充電器的聯邦節能標準</a>。\n        </li>\n        <li>在 Apple 的<a\n                href=\"https://www.apple.com/environment/pdf/Apple_Regulated_Substances_Specification_Sept2018.pdf\"\n                onclick=\"s_objectID=&quot;https://www.apple.com/environment/pdf/Apple_Regulated_Substances_Specification_Sept2018.pdf_1&quot;;return this.s_oc?this.s_oc(e):true\">《管制物質規範》</a>中，Apple\n            定義了對有害物質的限制，包括 Apple 所認為的「不含」某種物質的定義。所有 Apple 產品皆不含聚氯乙烯 (PVC) 及鄰苯二甲酸鹽，除了印度、泰國 (兩孔 AC 電源線) 與南韓的 AC\n            電源線，仍待當地政府核准我們的聚氯乙烯 (PVC) 及鄰苯二甲酸鹽替代物料。</li>\n    </ol>\n\n    <p>部分功能可能未在所有國家或地區提供。<a href=\"https://www.apple.com/tw/ios/feature-availability/\"\n            onclick=\"s_objectID=&quot;https://www.apple.com/tw/ios/feature-availability/_1&quot;;return this.s_oc?this.s_oc(e):true\">查看完整列表。</a>&nbsp;\n    </p>\n\n    <p><a href=\"http://www.apple.com/tw/nccid/\"\n            onclick=\"s_objectID=&quot;http://www.apple.com/tw/nccid/_1&quot;;return this.s_oc?this.s_oc(e):true\">如需台灣\n            NCC 認證產品的進一步詳細資訊，請按這裡。</a>&nbsp;</p>\n</div>"
+    },
+    {
       "id": 2,
-      "name": "Microsoft Store",
-      "description": "An electronics and computer retailer",
-      "rating": 4.3
-    }
-  },
-  {
-    "id": 8,
-    "name": "Product 8",
-    "price": 172,
-    "sellPrice": 505,
-    "additionPrice": 21,
-    "inventory": 45,
-    "rating": 4.6,
-    "store": {
-      "id": 1,
-      "name": "Apple Store",
-      "description": "An electronics retailer",
-      "rating": 4.5
-    }
-  },
-  {
-    "id": 9,
-    "name": "Product 9",
-    "price": 254,
-    "sellPrice": 831,
-    "additionPrice": 70,
-    "inventory": 40,
-    "rating": 4.1,
-    "store": {
-      "id": 1,
-      "name": "Apple Store",
-      "description": "An electronics retailer",
-      "rating": 4.5
-    }
-  },
-  {
-    "id": 10,
-    "name": "Product 10",
-    "price": 580,
-    "sellPrice": 490,
-    "additionPrice": 34,
-    "inventory": 4,
-    "rating": 3.5,
-    "store": {
-      "id": 2,
-      "name": "Microsoft Store",
-      "description": "An electronics and computer retailer",
-      "rating": 4.3
-    }
-  },
-  {
-    "id": 11,
-    "name": "Product 11",
-    "price": 529,
-    "sellPrice": 170,
-    "additionPrice": 30,
-    "inventory": 47,
-    "rating": 0.3,
-    "store": {
-      "id": 2,
-      "name": "Microsoft Store",
-      "description": "An electronics and computer retailer",
-      "rating": 4.3
-    }
-  },
-  {
-    "id": 12,
-    "name": "Product 12",
-    "price": 178,
-    "sellPrice": 659,
-    "additionPrice": 85,
-    "inventory": 78,
-    "rating": 2.5,
-    "store": {
-      "id": 1,
-      "name": "Apple Store",
-      "description": "An electronics retailer",
-      "rating": 4.5
-    }
-  },
-  {
-    "id": 13,
-    "name": "Product 13",
-    "price": 782,
-    "sellPrice": 845,
-    "additionPrice": 82,
-    "inventory": 61,
-    "rating": 1.4,
-    "store": {
+      "name": "Samsung Galaxy S21 Ultra",
+      "image": "https://images.samsung.com/is/image/samsung/p6pim/tw/galaxy-s21/gallery/tw-leather-cover-galaxy-s21-ultra-5g-ef-vg998lbegww-363740878?$684_547_PNG$",
+      "price": 1199,
+      "sellPrice": 1099,
+      "additionPrice": 100,
+      "inventory": 40,
+      "rating": 4.7,
+      "store": {
+        "id": 2,
+        "name": "Samsung Store",
+        "description": "An online store for Samsung products",
+        "rating": 4.6
+      },
+      "onSell": true,
+      "description": "<p>The Samsung Galaxy S21 Ultra is a flagship smartphone with a large Dynamic AMOLED display, a versatile camera system, and support for the S Pen.</p>"
+    },
+    {
       "id": 3,
-      "name": "Best Buy",
-      "description": "An electronics and home appliance retailer",
-      "rating": 4.1
-    }
-  },
-  {
-    "id": 14,
-    "name": "Product 14",
-    "price": 332,
-    "sellPrice": 642,
-    "additionPrice": 12,
-    "inventory": 42,
-    "rating": 2.8,
-    "store": {
-      "id": 1,
-      "name": "Apple Store",
-      "description": "An electronics retailer",
-      "rating": 4.5
-    }
-  },
-  {
-    "id": 15,
-    "name": "Product 15",
-    "price": 290,
-    "sellPrice": 259,
-    "additionPrice": 23,
-    "inventory": 55,
-    "rating": 1.7,
-    "store": {
-      "id": 2,
-      "name": "Microsoft Store",
-      "description": "An electronics and computer retailer",
-      "rating": 4.3
-    }
-  },
+      "name": "Sony PlayStation 5",
+      "price": 499,
+      "sellPrice": 449,
+      "additionPrice": 50,
+      "inventory": 30,
+      "rating": 4.9,
+      "store": {
+        "id": 3,
+        "name": "GameStop",
+        "description": "A video game retailer",
+        "rating": 4.3
+      },
+      "onSell": true,
+      "description": ""
+    },
+    {
+      "id": 4,
+      "name": "LG C1 OLED TV",
+      "price": 1999,
+      "sellPrice": 1799,
+      "additionPrice": 200,
+      "inventory": 20,
+      "rating": 4.8,
+      "store": {
+        "id": 4,
+        "name": "Best Buy",
+        "description": "An American multinational consumer electronics retailer",
+        "rating": 4.5
+      },
+      "onSell": true,
+      "description": "<p>The LG C1 OLED TV is a high-end television with stunning picture quality, deep blacks, and support for HDR content.</p>"
+    },
+    {
+      "id": 5,
+      "name": "DJI Mavic Air 2S",
+      "price": 999,
+      "sellPrice": 899,
+      "additionPrice": 100,
+      "inventory": 15,
+      "rating": 4.7,
+      "store": {
+        "id": 5,
+        "name": "DJI Store",
+        "description": "An online store for DJI drones and camera equipment",
+        "rating": 4.9
+      },
+      "onSell": true,
+      "description": "<p>The DJI Mavic Air 2S is a compact and powerful drone with a 1-inch CMOS sensor, 5.4K video recording, and intelligent flight modes.</p>"
+    },
+    {
+      "id": 6,
+      "name": "Canon EOS R5",
+      "price": 3899,
+      "sellPrice": 3699,
+      "additionPrice": 200,
+      "inventory": 23,
+      "rating": 4.9,
+      "store": {
+        "id": 6,
+        "name": "B&H Photo Video",
+        "description": "A photography and video equipment retailer",
+        "rating": 4.7
+      },
+      "onSell": true,
+      "description": "<p>The Canon EOS R5 is a professional-grade mirrorless camera with a high-resolution sensor, advanced autofocus system, and 8K video recording capability.</p>"
+    },
+    {
+      "id": 7,
+      "name": "Bose QuietComfort 35 II",
+      "price": 349,
+      "sellPrice": 299,
+      "additionPrice": 50,
+      "inventory": 105,
+      "rating": 4.7,
+      "store": {
+        "id": 7,
+        "name": "Amazon",
+        "description": "An online marketplace",
+        "rating": 4.5
+      },
+      "onSell": true,
+      "description": "<p>The Bose QuietComfort 35 II is a popular wireless noise-canceling headphone that offers excellent audio quality and comfortable long-term wear.</p>"
+    },
+    {
+      "id": 8,
+      "name": "Fitbit Versa 3",
+      "price": 229,
+      "sellPrice": 199,
+      "additionPrice": 30,
+      "inventory": 76,
+      "rating": 4.4,
+      "store": {
+        "id": 8,
+        "name": "Walmart",
+        "description": "A multinational retail corporation",
+        "rating": 4.0
+      },
+      "onSell": true,
+      "description": "<p>The Fitbit Versa 3 is a feature-packed smartwatch with fitness tracking capabilities, built-in GPS, and support for music streaming services.</p>"
+    },
+    {
+      "id": 9,
+      "name": "Amazon Echo Dot (4th Gen)",
+      "price": 49,
+      "sellPrice": 39,
+      "additionPrice": 10,
+      "inventory": 183,
+      "rating": 4.6,
+      "store": {
+        "id": 7,
+        "name": "Amazon",
+        "description": "An online marketplace",
+        "rating": 4.5
+      },
+      "onSell": true,
+      "description": "<p>The Amazon Echo Dot (4th Gen) is a compact and affordable smart speaker with Alexa voice assistant, suitable for controlling smart home devices and playing music.</p>"
+    },
+    {
+      "id": 10,
+      "name": "Nintendo Switch",
+      "price": 299,
+      "sellPrice": 279,
+      "additionPrice": 20,
+      "inventory": 64,
+      "rating": 4.8,
+      "store": {
+        "id": 9,
+        "name": "Target",
+        "description": "A retail corporation",
+        "rating": 4.3
+      },
+      "onSell": true,
+      "description": "<p>The Nintendo Switch is a popular gaming console that can be used as both a handheld device and a traditional home console, offering a wide range of games for all ages.</p>"
+    },
+    {
+      "id": 11,
+      "name": "Sony PlayStation 5",
+      "price": 499,
+      "sellPrice": 449,
+      "additionPrice": 50,
+      "inventory": 32,
+      "rating": 4.9,
+      "store": {
+        "id": 9,
+        "name": "Target",
+        "description": "A retail corporation",
+        "rating": 4.3
+      },
+      "onSell": true,
+      "description": "<p>The Sony PlayStation 5 is the latest gaming console from Sony, offering stunning graphics, fast loading times, and a wide range of exclusive games.</p>"
+    },
+    {
+      "id": 12,
+      "name": "Samsung Galaxy S21 Ultra",
+      "price": 1199,
+      "sellPrice": 1099,
+      "additionPrice": 100,
+      "inventory": 17,
+      "rating": 4.8,
+      "store": {
+        "id": 3,
+        "name": "Best Buy",
+        "description": "An electronics retailer",
+        "rating": 4.6
+      },
+      "onSell": false,
+      "description": "<p>The Samsung Galaxy S21 Ultra is a premium Android smartphone with a large dynamic AMOLED display, powerful cameras, and advanced features.</p>"
+    },
+    {
+      "id": 13,
+      "name": "Apple Watch Series 6",
+      "price": 399,
+      "sellPrice": 379,
+      "additionPrice": 20,
+      "inventory": 61,
+      "rating": 4.7,
+      "store": {
+        "id": 5,
+        "name": "Apple Store",
+        "description": "An online and physical store for Apple products",
+        "rating": 4.9
+      },
+      "onSell": true,
+      "description": "<p>The Apple Watch Series 6 is a premium smartwatch with advanced health and fitness features, an always-on display, and a wide range of available watch bands.</p>"
+    },
+    {
+      "id": 14,
+      "name": "DJI Mavic Air 2",
+      "price": 799,
+      "sellPrice": 749,
+      "additionPrice": 50,
+      "inventory": 44,
+      "rating": 4.8,
+      "store": {
+        "id": 1,
+        "name": "DJI Online Store",
+        "description": "The official online store for DJI drones and accessories",
+        "rating": 4.7
+      },
+      "onSell": false,
+      "description": "<p>The DJI Mavic Air 2 is a compact and portable drone with a 4K camera, intelligent flight modes, and an impressive flight time of up to 34 minutes.</p>"
+    },
+    {
+      "id": 15,
+      "name": "Sony WH-1000XM4",
+      "price": 349,
+      "sellPrice": 319,
+      "additionPrice": 30,
+      "inventory": 92,
+      "rating": 4.9,
+      "store": {
+        "id": 2,
+        "name": "Sony Store",
+        "description": "An online and physical store for Sony products",
+        "rating": 4.7
+      },
+      "onSell": true,
+      "description": "<p>The Sony WH-1000XM4 is a high-end wireless noise-canceling headphone with exceptional sound quality, long battery life, and smart features like adaptive sound control.</p>"
+    },
   {
     "id": 16,
     "name": "Product 16",
