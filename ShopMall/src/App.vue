@@ -6,7 +6,7 @@ import {useEnv} from "@/compositions/useEnv";
 import {useDeviceDetector} from "@/compositions/useDevice";
 import {storeToRefs} from "pinia";
 import router from "@/router";
-
+import Loading from "@/components/Loading.vue";
 const route = useRoute();
 
 const routeMap = reactive({
@@ -164,13 +164,21 @@ watch(() => route.path,
       </ul>
     </nav>
   </header>
-  <main class="main min-h-screen w-full pt-2" @click="closeMobileNav">
-    <Suspense>
-      <RouterView/>
-      <template #fallback>
-        Loading...
-      </template>
-    </Suspense>
+  <main class="main min-h-screen w-full"
+        :class="[isMobile? 'pt-2 px-4' : 'pt-2']"
+        @click="closeMobileNav">
+    <RouterView v-slot="{ Component }">
+      <Suspense>
+        <template #default>
+          <div>
+            <component :is="Component" :key="$route.path"/>
+          </div>
+        </template>
+        <template #fallback>
+          <Loading/>
+        </template>
+      </Suspense>
+    </RouterView>
   </main>
 </template>
 
