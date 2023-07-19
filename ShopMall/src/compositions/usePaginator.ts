@@ -8,8 +8,7 @@ const defaultOptions: Required<IOptions> = {
     totalButtons: 5,
 };
 
-
-export default (userOptions: IOptions): IPagination => {
+function usePaginator (userOptions: IOptions): IPagination {
     const options: Required<IOptions> = {...defaultOptions, ...userOptions}
     const _currentPage = ref(options.currentPage)
     const pageSize = ref(options.pageSize)
@@ -170,3 +169,5 @@ function consecutiveSlots(startIdx: number, endIdx: number): Array<IPageButton> 
     }
     return result
 }
+
+export {usePaginator}

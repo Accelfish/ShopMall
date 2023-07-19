@@ -4,7 +4,7 @@ import placeholderImageDark from '@/assets/images/online-shopping_dark.png';
 
 import {computed, reactive, watch, ref, onMounted} from 'vue';
 import type {Ref} from 'vue'
-import useCursorPosinEle from "@/compositions/useCursorPosinEle";
+import {useCursorPosinEle} from "@/compositions/useCursorPosinEle";
 
 interface IPreviewImg {
   isLazyLoading: boolean,

@@ -70,8 +70,8 @@ watch(() => route.path,
 </script>
 
 <template>
-  <header class="header-wrapper fixed top-0 left-0 right-0 z-10 w-full bg-black">
-    <div class="header flex justify-between px-8 h-full w-full items-center" :class="{'px-4':isMobile}">
+  <header class="header-wrapper fixed top-0 left-0 right-0 z-50 w-screen bg-black">
+    <div class="header flex justify-between h-full w-full items-center" :class="[isMobile ? 'px-4' : 'px-8']">
       <h2 class="header__logo mr-5 md:mr-20"
           :class="{'header__logo--mobile': isMobile}">
         <RouterLink class="block h-full hover:bg-transparent" :to="'/'" title="線上商店">線上商店</RouterLink>
@@ -79,14 +79,16 @@ watch(() => route.path,
       <div class="hidden header__body md:flex flex-1 items-center justify-between h-full">
         <div class="flex-1 flex justify-center items-center">
           <nav class="nav w-1/2">
-            <div class="w-full flex bg-white">
-              <input class="rounded w-full h-8 px-3 py-2 focus:outline-none" type="text" placeholder="搜尋"
-                     v-model.trim="keyword"
-                     @keyup.enter="search">
-              <button class="w-12 bg-gray-800 text-white" @click="search">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-white"/>
-              </button>
-            </div>
+            <form>
+              <div class="w-full flex bg-white">
+                <input class="rounded w-full h-8 px-3 py-2 focus:outline-none" type="text" placeholder="搜尋"
+                       v-model.trim="keyword"
+                       @keyup.enter="search">
+                <button class="w-12 bg-gray-800 text-white" type="submit" @click.prevent="search">
+                  <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-white"/>
+                </button>
+              </div>
+            </form>
           </nav>
         </div>
         <div class="header__foot flex items-center">
@@ -110,10 +112,14 @@ watch(() => route.path,
       </div>
       <div class="md:hidden flex justify-between items-center w-full">
         <div class="w-4/6 bg-white h-full">
-          <input class="rounded w-full h-full max-h-8 px-3 py-2 focus:outline-none"
-                 type="text" placeholder="搜尋"
-                 v-model.trim="keyword"
-                 @keyup.enter="search">
+          <form>
+              <input class="rounded w-full h-full max-h-8 px-3 py-2 focus:outline-none" type="text" placeholder="搜尋"
+                     v-model.trim="keyword"
+                     @keyup.enter="search">
+              <button class="w-12 bg-gray-800 text-white hidden" type="submit" @click.prevent="search">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-white"/>
+              </button>
+          </form>
         </div>
         <div class="flex items-center">
           <RouterLink :to="{name: 'cart'}" class="p-1.5">
@@ -179,14 +185,24 @@ watch(() => route.path,
   width: 220px;
   height: 50px;
 
+  @media(min-width: 320px) and (max-width: 767px) {
+    width: 50px;
+  }
+
   & > a {
     text-indent: -9999px;
     background-image: url('@/assets/logo.svg');
     background-repeat: no-repeat;
     background-position: -40px -115px;
     background-size: 140% 560%;
+
+    @media(min-width: 320px) and (max-width: 767px) {
+      background-position: -78px -100px;
+      background-size: 350px 250px;
+    }
   }
 }
+
 
 .header__logo--mobile {
   width: 50px;
@@ -197,6 +213,7 @@ watch(() => route.path,
     background-size: 350px 250px;
   }
 }
+
 
 .nav__item {
   color: #fff;

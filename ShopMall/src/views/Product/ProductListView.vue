@@ -3,7 +3,10 @@ import {ref, computed, onMounted} from "vue";
 import type {ComputedRef, Ref} from "vue";
 import {onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 import type {LocationQueryValue} from 'vue-router';
-import ProductInst from "../../entities/productInst";
+import type ProductInst from "../../entities/productInst";
+import NumberInput from "@/components/NumberInput.vue";
+
+import {useDeviceDetector} from "@/compositions/useDevice";
 
 import Card from '@/components/Card.vue';
 import Pagination from '@/components/Pagination.vue';

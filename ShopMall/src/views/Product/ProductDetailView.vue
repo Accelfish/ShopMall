@@ -13,9 +13,12 @@ import NumberInput from "@/components/NumberInput.vue";
 import {useDeviceDetector} from "@/compositions/useDevice";
 import {useUser} from "@/stores/user";
 import {useCart} from "@/stores/cart";
+import ProfileIcon from "@/components/ProfileIcon.vue";
+import {EProfileIcon} from "@/enum/Enums";
 
 const route = useRoute();
 const router = useRouter();
+
 const pid: number = parseInt(route.params.id as string);
 const isLoading: Ref<boolean> = ref(true);
 const deviceDetector = useDeviceDetector();
@@ -42,9 +45,8 @@ let product: ProductInst = reactive(new ProductInst(
 onMounted(async () => {
   try {
     const productDetail: ProductInst = await api.getProductDetail(pid);
-
     if (productDetail) {
-      product = productDetail;
+      Object.assign(product, productDetail);
       if (!product.onSell) {
         alert('Not On Sell');
         await router.replace({name: 'productList'});
@@ -71,7 +73,7 @@ const addProductToCart = async () => {
     alert('No Inventory');
     return;
   }
-  try{
+  try {
     await addProduct(new CartItem(
         false,
         product.id,
@@ -88,16 +90,16 @@ const addProductToCart = async () => {
         product.image,
     ));
     alert('加入購物車成功');
-  } catch(e: any) {
+  } catch (e: any) {
     alert(e.message);
-    //await router.push('/');
   }
 }
 
 </script>
 <template>
   <div class="product__container
-              grid grid-cols-1
+              grid
+              grid-cols-1
               md:grid-cols-2
               md:gap-6" v-if="!isLoading">
     <div class="product__head
@@ -107,7 +109,7 @@ const addProductToCart = async () => {
                 p-1
                 rounded
                 bg-gray-50">
-      <div class="w-full md:w-7/12">
+      <div class="w-full md:w-7/12 h-full">
         <PreviewImage
             :title="product.name"
             :isLazyLoading="true"
@@ -130,7 +132,8 @@ const addProductToCart = async () => {
           </template>
           <span v-else>未有評價</span>
         </div>
-        <div class="product__price p-4">
+        <div class="product__price"
+             :class="[isMobile ? 'p-0' : 'p-4']">
           <span v-if="product.price > product.sellPrice"
                 class="line-through mr-1 text-gray-400">
             ${{ product.price }}
@@ -142,8 +145,11 @@ const addProductToCart = async () => {
       </div>
       <div class="info__body">
         <div class="cart">
-          <div class="flex items-center h-11">
-            <NumberInput :min-value="1" :max-value="product.inventory" v-model:modelValue="addCartCount"/>
+          <div class="flex"
+               :class="[isMobile ? 'flex-col': 'h-11 items-center']">
+            <NumberInput class="mr-4"
+                         :min-value="1" :max-value="product.inventory" :is-show-button="true"
+                         v-model="addCartCount"/>
             <div class="product__inventory h-full flex items-center text-gray-400">
               <span>
                 庫存：
