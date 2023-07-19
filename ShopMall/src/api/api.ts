@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useEnv} from "@/compositions/useEnv";
 import type ProductInst from "@/entities/productInst";
+import type {IMessage} from "@/modal/IProduct";
 import type StoreInst from "@/entities/storeInst";
 
 const {VITE_BASE_API} = useEnv();
@@ -18,6 +19,27 @@ const getProductDetail = (id: number): Promise<ProductInst> => new Promise((reso
     productRequest.get('/data.json', {params: {id: id}})
         .then((res) => resolve(res.data.find((item: any) => item.id === id)))
         .catch((err) => reject(err));
+});
+
+const getProductDescription = (id: number): Promise<string> => new Promise((resolve, reject) => {
+        productRequest.get('/data.json', {params: {id: id, text:'desc'}})
+            .then((res) => {
+                const data:ProductInst[] = res.data;
+                const description = data.find((item: any) => item.id === id)?.description;
+                resolve(description ? description: '');
+            })
+            .catch((err) => reject(err));
+});
+
+const getProductMessage = (productId: number): Promise<IMessage[]> => new Promise((resolve, reject) => {
+    productRequest.get('/message.json', {params: {pid: productId}})
+        .then((res) => {
+            const data:IMessage[] = res.data.filter((item:IMessage) => item.productId === productId)
+            resolve(data);
+        })
+        .catch((err) => reject(err));
+});
+
 const getStore = (id: number): Promise<StoreInst> => new Promise((resolve, reject) => {
     productRequest.get('/data.json', {params: {storeId: id}})
         .then((res) => {
@@ -37,6 +59,8 @@ const createOrder = (order: object): Promise<any> => new Promise((resolve, rejec
 export default {
     getProductList,
     getProductDetail,
+    getProductDescription,
+    getProductMessage,
     getStore,
     createOrder,
 }
