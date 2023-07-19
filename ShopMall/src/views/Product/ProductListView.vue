@@ -21,6 +21,7 @@ const router = useRouter();
 const queryMinPrice: LocationQueryValue | LocationQueryValue[] = route.query.minprice || route.query.minPrice;
 const queryMaxPrice: LocationQueryValue | LocationQueryValue[] = route.query.maxprice || route.query.maxPrice;
 
+const storeId: number = route.params.storeId ? parseInt(route.params.storeId as string, 10) : 0;
 const page: number = route.query.page ? parseInt(route.query.page as string, 10) : 1;
 const filterMinPrice: number | null = queryMinPrice ? parseInt(queryMinPrice.toString(), 10) : null;
 const filterMaxPrice: number | null = queryMaxPrice ? parseInt(queryMaxPrice.toString(), 10) : null;
@@ -138,14 +139,22 @@ async function getProducts(): Promise<ProductInst[]> {
 
 const updateCurrentPage = (toPage: number) => {
   setCurrentPage(toPage);
+  if (storeId>0) {
+    router.push({
+      name: 'store',
+      query: {
+        ...getQuery.value.value,
+      },
+    });
+  } else {
     router.push({
       name: 'product',
       query: {
-      ...route.query,
         ...getQuery.value.value,
       },
     });
   }
+}
 
 const showProductList: ComputedRef<ProductInst[]> = computed(() => {
   const pd = [...products.value];
