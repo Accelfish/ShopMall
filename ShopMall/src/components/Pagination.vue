@@ -94,8 +94,6 @@ function updateCurrentPage(page: number) {
 </template>
 
 <style scoped>
-.pagination {
-
 .pagination__item-active {
   background-color: #EE4D2DFF;
 }
