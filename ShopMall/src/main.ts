@@ -1,14 +1,22 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import router from './router'
-import './assets/main.scss'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faStore, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import {createApp} from 'vue';
+import {createPinia} from 'pinia';
+import App from './App.vue';
+import router from './router';
+import './assets/main.scss';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+import {
+    faStore,
+    faMagnifyingGlass,
+    faCartShopping,
+    faEye,
+    faEyeSlash,
+    faTrash,
+    faUser
+} from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
-library.add(faStore, faMagnifyingGlass);
+library.add(faStore, faMagnifyingGlass, faCartShopping, faEye, faEyeSlash, faTrash, faUser);
 
 const pinia = createPinia()
 const app = createApp(App)
