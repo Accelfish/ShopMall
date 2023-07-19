@@ -1,6 +1,11 @@
 import {computed} from 'vue';
 
-export default (htmlEle: HTMLElement, event: MouseEvent) => {
+interface Pos {
+    posX: number,
+    posY: number
+}
+
+function useCursorPosinEle(htmlEle: HTMLElement, event: MouseEvent):Pos {
     //get cursor position in htmlEle
     const pos = computed(() => {
         let x = 0;
@@ -21,3 +26,5 @@ export default (htmlEle: HTMLElement, event: MouseEvent) => {
         posY: pos.value.posY
     }
 }
+
+export {useCursorPosinEle};

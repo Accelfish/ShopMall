@@ -54,7 +54,8 @@ export default class ProductInst implements IProduct {
         this.onSell = onSell;
         this.url = url;
     }
+
     getImage(): string {
-        return this.image || placeholderImage;
+        return this.image || '';
     }
 }

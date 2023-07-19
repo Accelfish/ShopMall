@@ -17,20 +17,16 @@ export const useUser =
                     { id: 1, account: 'admin', password: 'admin'},
                     { id: 2, account: 'Kriz', password: '1234'},
                 ];
+                const targetMember = userList.find(user => user.account === account && user.password === password);
+                if (targetMember) {
+                    const user = {account: account, password: password, token: 'fake-jwt-token'};
+                    userData.data = user;
 
-                try {
-                    const targetMember = userList.find(user => user.account === account && user.password === password);
-                    if (targetMember) {
-                        const user = {account: account, password: password, token: 'fake-jwt-token'};
-                        userData.data = user;
-                        // store user details and jwt in local storage to keep user logged in between page refreshes
-                        localStorage.setItem('user', JSON.stringify(user));
-                        await router.push({path: redirect});
-                    } else {
-                        throw 'Username or password is incorrect'
-                    }
-                } catch (error) {
-                    alert(error);
+                    // store user details and jwt in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('user', JSON.stringify(user));
+                    await router.push({path: redirect});
+                } else {
+                    throw new Error('Username or password is incorrect');
                 }
             };
 

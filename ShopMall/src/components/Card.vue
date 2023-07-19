@@ -21,22 +21,23 @@ const props = withDefaults(defineProps<ICard>(), {
 
 </script>
 <template>
-  <RouterLink class="link flex justify-center" :to="url" v-if="url">
-    <div class="card group">
+  <RouterLink class="link block" :to="url" v-if="url">
+    <div class="card group flex flex-col h-full">
       <div class="card__head">
         <slot name="head">
-          <div class="card__img" :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
+          <div class="card__img"
+               :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
             <PreviewImage
-                :isLazyLoading=props.isLazyLoading
+                :isLazyLoading="props.isLazyLoading"
                 :title="props.title"
                 :img="props.img"
                 :preview="false"
-                :useGrayPreviewImage="false"
+                :useGrayPreviewImage="props.useGrayPreviewImage"
             />
           </div>
         </slot>
       </div>
-      <div class="card__body">
+      <div class="card__body flex flex-1 flex-col justify-between h-full">
         <slot name="body">
           <div class="card__title">
             {{ props.title }}
@@ -49,21 +50,22 @@ const props = withDefaults(defineProps<ICard>(), {
     </div>
   </RouterLink>
   <div class="flex justify-center" v-else>
-    <div class="card group ">
+    <div class="card group flex flex-col h-full">
       <div class="card__head">
         <slot name="head">
-          <div class="card__img" :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
+          <div class="card__img"
+               :class="{'group-hover:scale-150 transition ease-in-out duration-200': isZoomImg}">
             <PreviewImage
-                :isLazyLoading=props.isLazyLoading
+                :isLazyLoading="props.isLazyLoading"
                 :title="props.title"
                 :img="props.img"
                 :preview="false"
-                :useGrayPreviewImage="false"
+                :useGrayPreviewImage="props.useGrayPreviewImage"
             />
           </div>
         </slot>
       </div>
-      <div class="card__body">
+      <div class="card__body flex flex-1 flex-col justify-between h-full">
         <slot name="body">
           <div class="card__title">
             {{ props.title }}
@@ -81,7 +83,12 @@ const props = withDefaults(defineProps<ICard>(), {
   width: 100%;
   max-width: 200px;
   height: 100%;
-  max-height: 200px;
+  max-height:200px;
   overflow: hidden;
+}
+
+.card__img {
+  width:100%;
+  height: 100%;
 }
 </style>

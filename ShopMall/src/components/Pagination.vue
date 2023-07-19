@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import {toRefs} from "vue";
-import usePaginator from "@/compositions/usePaginator";
+import {toRefs, ref} from "vue";
+import {usePaginator} from "@/compositions/usePaginator";
+import {useDeviceDetector} from "@/compositions/useDevice";
+
+const deviceDetector = useDeviceDetector();
+const isMobile = ref(deviceDetector.mobile);
 
 interface IPagination {
   totalLength: number,
@@ -38,7 +42,7 @@ const {
   currentPage: data.currentPage,
   pageSize: data.pageSize,
   totalItems: data.totalLength,
-  totalButtons: 7,
+  totalButtons: isMobile.value ? 0 : 7,
 })
 
 function updateCurrentPage(page: number) {
@@ -47,12 +51,14 @@ function updateCurrentPage(page: number) {
 
 </script>
 <template>
-  <div class="pagination w-full m-0 p-0 inline-flex justify-between list-none">
-    <button class="pagination__item pagination__arrow"
+  <div class="w-full m-0 p-0 flex justify-between"
+       :class="[isMobile ? 'justify-center' : 'justify-between' ] ">
+    <button class="m-0 border-0 bg-transparent flex justify-center items-center cursor-pointer p-1 md:p-2 text-base h-7"
+            :class="[isMobile && !hasPrev ? 'invisible' : 'visible']"
             :disabled="!hasPrev"
             @click="updateCurrentPage(goPrev())"
     >
-      <svg class="pagination__icon"
+      <svg class="pagination__icon w-4 h-4"
            enable-background="new 0 0 11 11"
            viewBox="0 0 11 11" x="0" y="0">
         <g>
@@ -63,19 +69,20 @@ function updateCurrentPage(page: number) {
       </svg>
     </button>
     <button
-        class="pagination__item"
-        :class="{ 'pagination__item-active': button.active } "
+        class="m-0 border-0 flex justify-center items-center cursor-pointer p-1 md:p-2 text-base h-7 rounded"
+        :class="[button.active && !isMobile ? 'cursor-default text-white pagination__item-active' : 'bg-transparent']"
         v-for="(button, idx) in buttons"
         :key="idx"
         @click="updateCurrentPage(button.page)"
     >
       {{ button.ellipsis ? '...' : button.page }}
     </button>
-    <button class="pagination__item pagination__arrow"
+    <button class="m-0 border-0 bg-transparent flex justify-center items-center cursor-pointer p-1 md:p-2 text-base h-7"
+            :class="{'pagination__item-hidden': !hasNext && isMobile}"
             :disabled="!hasNext"
             @click="updateCurrentPage(goNext())"
     >
-      <svg class="pagination__icon"
+      <svg class="pagination__icon w-4 h-4"
            enable-background="new 0 0 11 11"
            viewBox="0 0 11 11" x="0" y="0">
         <path
@@ -84,55 +91,13 @@ function updateCurrentPage(page: number) {
       </svg>
     </button>
   </div>
-
 </template>
 
 <style scoped>
 .pagination {
-}
-
-.pagination__item {
-  border: 0;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  min-width: 2rem;
-  margin-left: 0.5375rem;
-  margin-right: 0.5375rem;
-  font-size: 1rem;
-  height: 1.875rem;
-}
 
 .pagination__item-active {
   background-color: #EE4D2DFF;
-  color: #fff;
-  cursor: default;
 }
 
-.pagination__icon {
-  width: 1em;
-  height: 1em;
-}
-
-@media (min-width: 375px) {
-  .pagination__item {
-    min-width: 1.5rem;
-    margin-left: 0.35375rem;
-    margin-right: 0.3375rem;
-    font-size: 1rem;
-    height: 1.875rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .pagination__item {
-    min-width: 2.5rem;
-    margin-left: 0.9375rem;
-    margin-right: 0.9375rem;
-    font-size: 1.25rem;
-    height: 1.875rem;
-  }
-}
 </style>

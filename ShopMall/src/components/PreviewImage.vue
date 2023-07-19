@@ -2,9 +2,9 @@
 import placeholderImage from '@/assets/images/online-shopping.png';
 import placeholderImageDark from '@/assets/images/online-shopping_dark.png';
 
-import {computed, reactive, watch, ref, onMounted} from 'vue';
+import {computed, reactive, watch, ref, onMounted, onUnmounted} from 'vue';
 import type {Ref} from 'vue'
-import useCursorPosinEle from "@/compositions/useCursorPosinEle";
+import {useCursorPosinEle} from "@/compositions/useCursorPosinEle";
 
 interface IPreviewImg {
   isLazyLoading: boolean,
@@ -15,11 +15,11 @@ interface IPreviewImg {
 }
 
 const props = withDefaults(defineProps<IPreviewImg>(), {
-  img: placeholderImage,
   title: '',
   useGrayPreviewImage: false,
   isLazyLoading: false,
   preview: true,
+  img: undefined,
 });
 
 const pos = reactive({
@@ -50,9 +50,7 @@ const zoomViewSize = reactive({
 });
 
 const isLoaded = ref(false);
-
 const isShowZoomContainer = ref(false);
-
 const zoomContainer: Ref<HTMLElement | null> = ref(null);
 const zoomView: Ref<HTMLElement | null> = ref(null);
 const imgTarget: Ref<HTMLImageElement | null> = ref(null);
@@ -60,6 +58,10 @@ const imgContainer: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
   handleReplaceLazyLoadingImage(resizeZoomZone);
+  window.addEventListener('resize', resizeZoomZone);
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeZoomZone);
 })
 
 const handleErrorImage = function (event: Event) {
@@ -81,14 +83,22 @@ const resizeZoomZone = () => {
   }
 }
 
-const handleReplaceLazyLoadingImage = (callback?) => {
+const handleReplaceLazyLoadingImage = (callback?: Function) => {
   if (imgTarget.value) {
-    const realImage = new Image();
-    realImage.src = imgTarget.value.attributes['data-src'].value;
-    realImage.onload = () => {
-      imgTarget.value.attributes['src'].value = realImage.src;
-      zoomView.value.style['background-image'] = `url(${realImage.src})`;
-      if (callback) callback();
+    if(imgTarget.value.getAttribute('data-src')) {
+      const realImage = new Image();
+      realImage.onload = () => {
+        imgTarget.value?.setAttribute('src', realImage.src);
+        if (zoomView.value) {
+          zoomView.value.style.backgroundImage = `url(${realImage.src})`;
+        }
+        if (callback) {
+          callback();
+        }
+        isLoaded.value = true;
+      }
+      realImage.src = imgTarget.value.getAttribute('data-src') || '';
+    } else {
       isLoaded.value = true;
     }
   }
@@ -99,8 +109,9 @@ const UpdZoomZoneSize = (event: WheelEvent) => {
       && zoomZoneSize.height + event.deltaY * 0.01 <= imgContainerSize.height) {
     zoomZoneSize.width = zoomZoneSize.width += event.deltaY * 0.01;
     zoomZoneSize.height = zoomZoneSize.height += event.deltaY * 0.01;
-    if (zoomZoneSize.width < 20 || zoomZoneSize.height < 20) zoomZoneSize.width = zoomZoneSize.height = 20;
-    ratio.value = Math.min(zoomViewSize.width / zoomZoneSize.width, zoomViewSize.height / zoomZoneSize.height);
+    if (zoomZoneSize.width < 20 || zoomZoneSize.height < 20) {
+      zoomZoneSize.width = zoomZoneSize.height = 20
+    };
   }
 }
 
@@ -141,11 +152,12 @@ watch([pos, zoomZoneSize], (newVal, oldVal) => {
 
 <template>
   <div class="imgContainer
-              max-w-full
+              w-full
+              h-full
               relative"
        ref="imgContainer">
 
-    <div class="imgContainer__content"
+    <div class="imgContainer__content w-full h-full"
          @mousemove="moveZoomContainer"
          @mouseleave="mouseLeaveZoomContainer"
          @wheel.prevent="UpdZoomZoneSize"
@@ -181,6 +193,12 @@ watch([pos, zoomZoneSize], (newVal, oldVal) => {
 </template>
 
 <style scoped lang="scss">
+.imgContainer__target {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .imgContainer__zoomZone {
   width: 400px;
   height: 400px;

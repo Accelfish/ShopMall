@@ -35,9 +35,6 @@ const register = () => {
     </form>
     <RouterLink :to="{name:'login'}">登入</RouterLink>
   </div>
-  <!--  <button @click="logout">logout</button>-->
-  <!--  <button @click="log">isLogin</button>-->
-  <!--  <button @click="log">userData</button>-->
 </template>
 
 <style scoped lang="scss">

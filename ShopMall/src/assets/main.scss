@@ -14,17 +14,17 @@
           'left left main main main main main main main main right right'
           'footer footer footer footer footer footer footer footer footer footer footer footer';
 
-  @media(min-width: 375px) {
+  @media(min-width: 320px) and (max-width: 767px) {
     grid-template-areas:
           'header header header header header header header header header header header header'
           'main main main main main main main main main main main main'
           'footer footer footer footer footer footer footer footer footer footer footer footer';
   }
 
-  @media(min-width: 768px) {
+  @media(min-width: 768px) and (max-width: 1023px) {
     grid-template-areas:
           'header header header header header header header header header header header header'
-          'left left main main main main main main main main right right'
+          'left main main main main main main main main main main right'
           'footer footer footer footer footer footer footer footer footer footer footer footer';
   }
 }
@@ -34,6 +34,4 @@ body {
   place-items: center;
   justify-content: center;
 }
-
-
 

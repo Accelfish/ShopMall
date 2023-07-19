@@ -30,3 +30,11 @@ export interface IProduct {
     onSell: boolean;
     getImage(): string;
 }
+
+export interface IMessage {
+    id: number,
+    name: string,
+    message: string,
+    rating: number,
+    productId: number,
+}
