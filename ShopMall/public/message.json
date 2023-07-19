@@ -1,0 +1,120 @@
+[{
+    "id": 1,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 2,
+    "message": "很好用",
+    "rating": 4,
+    "productId": 1
+  },
+  {
+    "id": 3,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 4,
+    "message": "值得購買，功能很實用",
+    "rating": 4,
+    "productId": 1
+  },
+  {
+    "id": 5,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 6,
+    "message": "非常滿意這個產品，品質很好",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 7,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 8,
+    "message": "使用起來很順暢，外觀也很漂亮",
+    "rating": 4,
+    "productId": 1
+  },
+  {
+    "id": 9,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 10,
+    "message": "超出我的期望，功能強大，性價比高",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 11,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 12,
+    "message": "一般般吧，沒有特別突出的地方",
+    "rating": 3,
+    "productId": 1
+  },
+  {
+    "id": 13,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 14,
+    "message": "使用起來方便，滿足我的需求",
+    "rating": 4,
+    "productId": 1
+  },
+  {
+    "id": 15,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 16,
+    "message": "非常好用，質量可靠，推薦給大家",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 17,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 18,
+    "message": "價格合理，性能表現良好",
+    "rating": 4,
+    "productId": 1
+  },
+  {
+    "id": 19,
+    "message": "",
+    "rating": 5,
+    "productId": 1
+  },
+  {
+    "id": 20,
+    "message": "購買後無任何問題，非常滿意",
+    "rating": 5,
+    "productId": 1
+  }]
