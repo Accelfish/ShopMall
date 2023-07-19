@@ -43,6 +43,7 @@ if(String(route.query.isSuccess).toLowerCase() === 'true') {
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-height: 500px;
 }
 
 .circle{
