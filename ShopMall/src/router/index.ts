@@ -24,9 +24,29 @@ const router = createRouter({
         },
         {
             path: '/:id',
-            name: 'productDetail',
+            name: 'ProductDetail',
             component: ProductDetailView,
-            meta: {title: `商品詳情-${VITE_APP_NAME}`}
+            meta: {title: `商品詳情-${VITE_APP_NAME}`},
+            redirect: (to) => (
+                {name: 'ProductIntro', params: {id: to.params.id}}
+            ),
+            children: [{
+                    name: 'ProductIntro',
+                    path: 'intro',
+                    meta:{
+                        title: `商品介紹-${VITE_APP_NAME}`,
+                    },
+                    component: ()=>import('@/views/Product/ProductIntro.vue'),
+                },
+                {
+                    name: 'ProductMessage',
+                    path: 'message',
+                    meta:{
+                        title: `商品介紹-${VITE_APP_NAME}`,
+                    },
+                    component: ()=>import('@/views/Product/ProductMessage.vue'),
+                },
+            ],
         },
         {
             path: '/store/:storeId',
@@ -57,14 +77,12 @@ const router = createRouter({
             name: 'login',
             component: () => import('@/views/Member/LoginView.vue'),
             meta: {title: `登入-${VITE_APP_NAME}`}
-
         },
         {
             path: '/logout',
             name: 'logout',
             component: () => import('@/views/Member/LogoutView.vue'),
             meta: {title: `登出-${VITE_APP_NAME}`}
-
         },
         {
             path: '/register',
@@ -84,7 +102,9 @@ const router = createRouter({
         },
     ],
     scrollBehavior(to, from, savedPosition) {
-        // always scroll to top
+        if (savedPosition) {
+            return savedPosition;
+        };
         return {top: 0}
     },
 })

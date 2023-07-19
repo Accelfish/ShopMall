@@ -5,11 +5,16 @@ import {useRoute, useRouter} from "vue-router";
 import ProductInst from "../../entities/productInst";
 import {CartItem} from "../../entities/cartInst";
 import StoreInst from "../../entities/storeInst";
-
+import ProductIntro from "@/views/Product/ProductIntro.vue";
+import ProductMessage from "@/views/Product/ProductMessage.vue";
 import api from '@/api/api';
 import PreviewImage from "@/components/PreviewImage.vue";
 import Rating from "@/components/Rating.vue";
 import NumberInput from "@/components/NumberInput.vue";
+import TabsWrapper from "@/components/Tabs/TabsWrapper.vue";
+import Tab from '@/components/Tabs/Tab.vue';
+import StoreCard from "@/components/StoreCard.vue";
+
 import {useDeviceDetector} from "@/compositions/useDevice";
 import {useUser} from "@/stores/user";
 import {useCart} from "@/stores/cart";
@@ -171,48 +176,24 @@ const addProductToCart = async () => {
       </div>
     </div>
 
-    <div class="store
-                bg-gray-50
+    <div class="bg-gray-50
                 md:col-span-2
-                p-4
-                rounded">
-      <div class="store__info flex">
-        <div class="store__head mr-4">
-          <div class="w-20 h-20 rounded-full overflow-hidden bg-white p-2 border-2">
-            <img v-if="product.store.image"
-                 :src="product.store.image"
-                 :alt="product.store.name">
-            <font-awesome-icon v-else icon="fa-solid fa-store" class="w-full h-full"/>
-          </div>
-        </div>
-        <div class="store__body flex flex-col justify-center">
-          <div class="store__name">
-            <h3><span class="mr-3">店家名稱：</span>{{ product.store.name }}</h3>
-          </div>
-          <div class="store__rating flex items-center">
-            <span class="mr-3">店家評價：</span>
-            <span class="flex items-center">
-              {{ product.store.rating }}
-              <Rating class="ml-2" :max-rate="1" :show-rate="1"/>
-            </span>
-          </div>
-        </div>
-      </div>
+                mb-4">
+      <StoreCard
+          :id="product.store.id"
+          :name="product.store.name"
+          :rating="product.store?.rating"
+          :description="product.store?.description"
+          :image="product.store?.image"/>
     </div>
-    <div class="product__detail
-                md:col-span-2
-                min-h-min
-                bg-gray-50
-                p-4
-                rounded">
-      <h3 class="text-2xl mb-2">商品詳情</h3>
-      <div class="product__content flex justify-center p-4" v-if="product.description">
-        <div v-html="product.description"></div>
-      </div>
-      <div class="product__content product__content-empty flex justify-center items-center" v-else>
-        <p class="text-gray-300 text-3xl">暫無詳情</p>
-      </div>
-
+    <div class="md:col-span-2">
+      <TabsWrapper class="sticky top-24 z-50" :class="{'-mx-4':isMobile}">
+        <Tab title="商品介紹" :link="{id: pid, name: 'ProductIntro'}"/>
+        <Tab title="評價" :link="{id: pid, name: 'ProductMessage'}"/>
+      </TabsWrapper>
+      <RouterView class="md:col-span-2 min-h-[6rem]" v-slot="{Component}">
+        <component :is="Component"/>
+      </RouterView>
     </div>
   </div>
 </template>
