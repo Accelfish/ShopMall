@@ -75,7 +75,6 @@ const setRateQueryObject = (rate: number) => {
 }
 
 const setPriceQueryObject = () => {
-  console.log('setPriceQueryObject', currentMinPrice.value, currentMaxPrice.value)
   if (currentMinPrice.value && currentMaxPrice.value && currentMinPrice.value > currentMaxPrice.value) {
     [currentMinPrice.value, currentMaxPrice.value] = [currentMaxPrice.value, currentMinPrice.value];
   }
@@ -129,7 +128,6 @@ async function getProducts(): Promise<ProductInst[]> {
     });
 
   } catch (e) {
-    console.log(e);
     alert('get ProductInst Error');
   } finally {
     isLoading.value = false;

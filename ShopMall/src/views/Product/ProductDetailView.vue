@@ -60,7 +60,6 @@ onMounted(async () => {
       await router.replace({name: 'notFound'});
     }
   } catch (e) {
-    console.log(e);
     alert('Get Error');
     await router.replace({name: 'notFound'});
   } finally {

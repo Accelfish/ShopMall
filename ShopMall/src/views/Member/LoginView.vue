@@ -32,7 +32,7 @@ const login = async () => {
         <input class="w-full focus:outline-none" v-model.trim="account" @keyup="errorMessage=''" type="text"
                placeholder="Account"/>
       </div>
-      <div class="flex bg-white mb-3 border-2 p-2 border-" :class="{'border-red-700': errorMessage}">
+      <div class="flex bg-white mb-3 border-2 p-2 justify-between" :class="{'border-red-700': errorMessage}">
         <input class="focus:outline-none" v-model.trim="password" @keyup="errorMessage=''"
                :type="isShowPassword?'text':'password'" placeholder="Password"/>
         <button type="button" @click="toggleShowPassword">
@@ -45,6 +45,7 @@ const login = async () => {
         </button>
       </div>
       <span class="text-red-700" :class="{'hidden': !errorMessage}">{{ errorMessage }}</span>
+
       <button class="rounded bg-gray-700 text-white p-2" type="button" @click="login">登入</button>
     </form>
     <RouterLink :to="{name:'register'}">註冊</RouterLink>

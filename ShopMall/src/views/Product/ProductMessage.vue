@@ -15,17 +15,14 @@ const route = useRoute();
 const pid: number = parseInt(route.params.id as string);
 
 let productMessage:Ref<IMessage[]> = ref([]);
-console.log('messageCreate');
 
 onMounted(async () => {
   try {
     const res:IMessage[] = await api.getProductMessage(pid);
-    console.log('messageMounted');
     if (res) {
       productMessage.value = res;
     }
   } catch (e) {
-    console.log(e);
     alert('Get Error');
   }
 });

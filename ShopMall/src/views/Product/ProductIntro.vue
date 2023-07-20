@@ -10,17 +10,14 @@ const route = useRoute();
 const pid: number = parseInt(route.params.id as string);
 
 let productDesc:Ref<string> = ref('');
-console.log('ProductDescriptionCreate');
 
 onMounted(async () => {
   try {
     const res:string = await api.getProductDescription(pid);
-    console.log('ProductDescriptionMounted');
     if (res) {
       productDesc.value = res;
     }
   } catch (e) {
-    console.log(e);
     alert('Get Error');
   }
 })

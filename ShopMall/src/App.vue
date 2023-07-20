@@ -24,7 +24,6 @@ const deviceDetector = useDeviceDetector();
 const isMobile = ref(deviceDetector.mobile);
 const userStore = useUser();
 const {user, isLogin} = storeToRefs(userStore);
-console.log(user.value, isLogin.value);
 const isMobileNavOpen = ref(false);
 const keyword = ref(route.query.keyword as string);
 const storeId = ref(route.params.id ? parseInt(route.params.storeId as string) : null);

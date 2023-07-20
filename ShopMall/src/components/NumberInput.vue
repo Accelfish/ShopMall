@@ -71,7 +71,7 @@ const filterNum = (event: Event) => {
   const maxVal = parseInt(props.maxValue?.toString()||'', 10);
   const minVal = parseInt(props.minValue?.toString()||'', 10);
   const newVal = parseInt(target.value, 10);
-  console.log(newVal);
+
   if (isNaN(newVal)) {
     if (minVal) {
       target.value = minVal.toString();

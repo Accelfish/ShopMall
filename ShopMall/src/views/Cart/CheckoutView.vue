@@ -155,7 +155,6 @@ const valid = computed(() => {
 });
 
 const checkOrder = async () => {
-  console.log('checkOrder');
   checkout.totalPrice = totalPrice.value;
   const {isValid} = valid.value;
   if (!isValid) {
