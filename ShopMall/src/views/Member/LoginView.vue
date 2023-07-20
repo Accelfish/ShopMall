@@ -8,7 +8,7 @@ const userStore = useUser();
 const {user, isLogin} = storeToRefs(userStore);
 const isShowPassword: Ref<boolean> = ref(false);
 const account: Ref<string> = ref('Kriz');
-const password: Ref<string> = ref('12345');
+const password: Ref<string> = ref('1234');
 const errorMessage: Ref<string> = ref('');
 
 const toggleShowPassword = () => {
@@ -27,12 +27,12 @@ const login = async () => {
 <template>
   <div class="flex flex-col justify-center items-center">
     <h1 class="mb-1">登入</h1>
-    <form class="flex flex-col mb-3">
-      <div class="mb-3 p-2 border-2" :class="{'border-red-700': errorMessage}">
+    <form class="flex flex-col items-center mb-3">
+      <div class="mb-3 p-2 border-2 w-52" :class="{'border-red-700': errorMessage}">
         <input class="w-full focus:outline-none" v-model.trim="account" @keyup="errorMessage=''" type="text"
                placeholder="Account"/>
       </div>
-      <div class="flex bg-white mb-3 border-2 p-2 justify-between" :class="{'border-red-700': errorMessage}">
+      <div class="flex bg-white mb-3 border-2 p-2 w-52 justify-between" :class="{'border-red-700': errorMessage}">
         <input class="focus:outline-none" v-model.trim="password" @keyup="errorMessage=''"
                :type="isShowPassword?'text':'password'" placeholder="Password"/>
         <button type="button" @click="toggleShowPassword">
@@ -45,10 +45,11 @@ const login = async () => {
         </button>
       </div>
       <span class="text-red-700" :class="{'hidden': !errorMessage}">{{ errorMessage }}</span>
-
-      <button class="rounded bg-gray-700 text-white p-2" type="button" @click="login">登入</button>
+      <div class="w-52 text-center">
+        <button class="rounded bg-gray-700 text-white p-2 w-full" type="button" @click="login">登入</button>
+        <RouterLink class="block p-2 w-full" :to="{name:'register'}">註冊</RouterLink>
+      </div>
     </form>
-    <RouterLink :to="{name:'register'}">註冊</RouterLink>
   </div>
 </template>
 
