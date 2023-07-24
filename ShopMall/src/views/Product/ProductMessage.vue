@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useDeviceDetector} from "@/compositions/useDevice";
-import {onMounted,onActivated,onDeactivated, ref} from "vue";
+import {onMounted, ref} from "vue";
 import type {Ref} from 'vue';
 import type {IMessage} from "@/modal/IProduct";
 
@@ -37,7 +37,7 @@ onMounted(async () => {
       <div class="border-b-2 p-4" v-for="item in productMessage" :key="item.id">
         <div class="flex items-center">
           <div class="w-10 h-10 mr-1">
-            <ProfileIcon :type="EProfileIcon.person"></ProfileIcon>
+            <ProfileIcon :type="EProfileIcon.person"/>
           </div>
           <div>
             {{item.name? item.name : '匿名'}}

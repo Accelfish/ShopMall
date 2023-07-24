@@ -27,7 +27,10 @@ const tabs: Tab[] = reactive(slots.default ? slots.default().map((tab, index) =>
   }
 }) : []);
 
-const selectedTab = ref(tabs.find(item => item.link.name === route.name)?.title);
+const SelectedTabDefault = tabs.find(item => item.link?.name === route.name);
+
+const selectedTab = ref(SelectedTabDefault ? SelectedTabDefault : tabs[0].title);
+
 provide("seletedTab", selectedTab);
 
 const clickTab = (tab: Tab) => {
@@ -45,8 +48,8 @@ const clickTab = (tab: Tab) => {
   <div class="tabs">
     <ul class="tabs__header flex bg-gray-200">
       <li class="tabs__item list-none flex-1 text-center p-2"
-          :class="{'bg-sky-400 text-white': route.name === tab.link.name,
-                   'cursor-pointer': route.name !== tab.link.name}"
+          :class="{'bg-sky-400 text-white': route.name === tab.link?.name || selectedTab === tab.title,
+                   'cursor-pointer': route.name !== tab.link?.name && selectedTab !== tab.title,}"
           v-for="tab in tabs"
           :key="tab.id"
           @click="clickTab(tab)">

@@ -166,18 +166,18 @@ watch(() => route.path,
   <main class="main min-h-screen w-full"
         :class="[isMobile? 'pt-2 px-4' : 'pt-2']"
         @click="closeMobileNav">
-    <RouterView v-slot="{ Component }">
-      <Suspense>
-        <template #default>
-          <div>
-            <component :is="Component" :key="$route.path"/>
-          </div>
-        </template>
-        <template #fallback>
-          <Loading/>
-        </template>
-      </Suspense>
-    </RouterView>
+     <RouterView v-slot="{ Component }">
+        <Suspense>
+          <template #default>
+            <div>
+              <component :is="Component"/>
+            </div>
+          </template>
+          <template #fallback>
+            <Loading/>
+          </template>
+        </Suspense>
+      </RouterView>
   </main>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useDeviceDetector} from "@/compositions/useDevice";
-import {onActivated, onDeactivated, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import type {Ref} from 'vue';
 import api from "@/api/api";
 import {useRoute} from "vue-router";
