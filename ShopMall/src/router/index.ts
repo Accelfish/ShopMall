@@ -98,7 +98,9 @@ const router = createRouter({
         },
         {
             path: '/:pathMatch(.*)*',
-            redirect: '/ErrorPage/404:pathMatch(.*)*',
+            redirect: (to) => (
+                {name: 'notFound'}
+            ),
         },
     ],
     scrollBehavior(to, from, savedPosition) {

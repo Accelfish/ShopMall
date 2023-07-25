@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {reactive, ref, onMounted} from "vue";
+import {reactive, ref, onMounted, computed} from "vue";
 import type {Ref} from 'vue';
 import {useRoute, useRouter} from "vue-router";
 import ProductInst from "../../entities/productInst";
@@ -18,8 +18,6 @@ import StoreCard from "@/components/StoreCard.vue";
 import {useDeviceDetector} from "@/compositions/useDevice";
 import {useUser} from "@/stores/user";
 import {useCart} from "@/stores/cart";
-import ProfileIcon from "@/components/ProfileIcon.vue";
-import {EProfileIcon} from "@/enum/Enums";
 
 const route = useRoute();
 const router = useRouter();
@@ -60,7 +58,6 @@ onMounted(async () => {
       await router.replace({name: 'notFound'});
     }
   } catch (e) {
-    console.log(e);
     alert('Get Error');
     await router.replace({name: 'notFound'});
   } finally {
@@ -188,11 +185,13 @@ const addProductToCart = async () => {
     </div>
     <div class="md:col-span-2">
       <TabsWrapper class="sticky top-24 z-50" :class="{'-mx-4':isMobile}">
-        <Tab title="商品介紹" :link="{id: pid, name: 'ProductIntro'}"/>
-        <Tab title="評價" :link="{id: pid, name: 'ProductMessage'}"/>
+        <Tab title="商品介紹" :link="{id:pid, name: 'ProductIntro'}"/>
+        <Tab title="評價" :link="{id:pid, name: 'ProductMessage'}"/>
       </TabsWrapper>
-      <RouterView class="md:col-span-2 min-h-[6rem]" v-slot="{Component}">
-        <component :is="Component"/>
+      <RouterView class="md:col-span-2 min-h-[6rem]" v-slot="{Component, route}" >
+        <keep-alive>
+          <component :is="Component" :key="route.path"/>
+        </keep-alive>
       </RouterView>
     </div>
   </div>

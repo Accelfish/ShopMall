@@ -24,7 +24,6 @@ const deviceDetector = useDeviceDetector();
 const isMobile = ref(deviceDetector.mobile);
 const userStore = useUser();
 const {user, isLogin} = storeToRefs(userStore);
-console.log(user.value, isLogin.value);
 const isMobileNavOpen = ref(false);
 const keyword = ref(route.query.keyword as string);
 const storeId = ref(route.params.id ? parseInt(route.params.storeId as string) : null);
@@ -167,18 +166,18 @@ watch(() => route.path,
   <main class="main min-h-screen w-full"
         :class="[isMobile? 'pt-2 px-4' : 'pt-2']"
         @click="closeMobileNav">
-    <RouterView v-slot="{ Component }">
-      <Suspense>
-        <template #default>
-          <div>
-            <component :is="Component" :key="$route.path"/>
-          </div>
-        </template>
-        <template #fallback>
-          <Loading/>
-        </template>
-      </Suspense>
-    </RouterView>
+     <RouterView v-slot="{ Component }">
+        <Suspense>
+          <template #default>
+            <div>
+              <component :is="Component"/>
+            </div>
+          </template>
+          <template #fallback>
+            <Loading/>
+          </template>
+        </Suspense>
+      </RouterView>
   </main>
 </template>
 

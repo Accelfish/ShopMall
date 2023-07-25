@@ -8,19 +8,16 @@ import StoreInst from "@/entities/storeInst"
 const route = useRoute();
 const router = useRouter();
 const storeId: number = route.params.storeId ? parseInt(route.params.storeId as string, 10) : 0;
-console.log(storeId);
 
 let store:StoreInst = reactive(new StoreInst(0, '', 0, '', ''));
 
 onMounted(async () => {
   try {
-    const data = await api.getStore(storeId);
+    const data:StoreInst = await api.getStore(storeId);
     if (data) {
       Object.assign(store, data);
-      console.log(store);
     }
   } catch (e) {
-    console.log(e);
     alert('Get Error');
     await router.replace({name: 'notFound'});
   }

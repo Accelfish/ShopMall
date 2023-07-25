@@ -19,8 +19,6 @@ let props = withDefaults(defineProps<Store>(), {
   image: '',
 });
 
-console.log(props);
-
 </script>
 
 <template>
@@ -36,7 +34,14 @@ console.log(props);
       </div>
       <div class="store__body flex flex-col justify-center">
         <div class="store__name">
-          <h3><span class="mr-3">店家名稱：</span>{{props.name}}</h3>
+          <h3>
+            <RouterLink :to="{name: 'store', params:{storeId: props.id}}">
+              <span class="mr-3">
+              店家名稱：
+              </span>
+              {{props.name}}
+            </RouterLink>
+          </h3>
         </div>
         <div class="store__rating flex items-center" v-if="props.rating">
           <span class="mr-3">店家評價：</span>
