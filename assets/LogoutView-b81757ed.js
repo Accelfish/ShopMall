@@ -1,0 +1,1 @@
+import{d as o,m as t,o as n,b as s,c as r}from"./index-f1976898.js";const _=o({__name:"LogoutView",setup(a){const e=t();return n(()=>{e.logout()}),(u,c)=>(s(),r("div",null,"logout..."))}});export{_ as default};
